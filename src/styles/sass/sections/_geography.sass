@@ -1,0 +1,50 @@
+.geography 
+    background: #fff
+    border-radius: var(--border-rad-block)
+
+.geography__wrap 
+    padding-bottom: 150px
+    
+
+
+.countries 
+    
+
+    &__list
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+        width: 510px
+        padding-left: 20px
+        
+
+    &__item
+        font-family: 'Montserrat';
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--c-grey)
+        width: 50%
+        padding-bottom: 15px
+
+        &::before
+            content: "\2022"
+            color: var(--c-blue)
+            font-weight: bold
+            display: inline-block
+            width: 1em
+            margin-left: -1em
+
+.geography__map-wrap
+    position: relative
+
+.map 
+    padding-left: 55px
+
+
+.label 
+    position: absolute
+    top: 0
+    right: 150px

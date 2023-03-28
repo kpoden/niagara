@@ -1,0 +1,79 @@
+.history__wrap 
+    position: relative
+
+
+.rail 
+    display: flex
+    justify-content: space-between
+    position: relative
+    padding-bottom: 130px
+    
+
+
+
+.year
+    display: flex
+    height: 52px
+    margin-top: 60px
+    align-items: center
+    justify-content: start
+    position: sticky
+    top: 50px    
+    
+
+    &__arr
+        width: 44px
+        height: 36px
+        margin-right: 50px
+
+    &__num
+        font-family: 'NeoSansW1G';
+        font-weight: 400;
+        font-size: 64px;
+        line-height: 77px;
+        letter-spacing: 0.1em;
+        color: var(--c-blue)
+        white-space: nowrap;
+
+
+
+.events
+    
+
+    &__item
+        max-width: 660px
+        min-height: 255px
+        padding: 60px
+
+        &:nth-child(2n)
+            background: var(--c-blue)
+        
+        &:nth-child(2n) .events__title
+            color: #fff
+
+        &:nth-child(2n) .events__text
+            color: #fff
+
+    &__title
+        ont-family: 'NeoSansW1G'
+        font-weight: 400
+        font-size: 36px
+        line-height: 140%
+        letter-spacing: 0.05em
+        text-transform: uppercase
+        color: var(--c-blue)
+        padding-bottom: 15px
+
+    &__text
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 140%;
+        color: #5A5A5A;
+
+
+.history__dec 
+    position: absolute
+    left: 0
+    bottom: 150px

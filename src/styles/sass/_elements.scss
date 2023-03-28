@@ -1,0 +1,33 @@
+.section-title {
+    font-family: 'NeoSansW1G', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 115px;
+    text-transform: uppercase;
+    color: var(--c-font-grey);
+    padding-top: 130px;
+    padding-bottom: 75px;
+}
+
+.section-title--blue {
+    color: var(--c-font-blue);
+    font-weight: 600;
+}
+
+.section-title--white {
+    color: #fff;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.section-title__img {
+    margin-bottom: -10px;
+}
+
+.section-title--wrap {
+    display: block;
+    padding-left: 100px;
+}

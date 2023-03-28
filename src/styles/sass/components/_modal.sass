@@ -1,0 +1,120 @@
+.modal
+    position: fixed
+    top: -50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    max-width: 615px
+    background: #fff
+    border-radius: 33px
+    box-shadow: 2px 0px 8px 4px rgba(34, 60, 80, 0.2);
+    z-index: 10000
+    opacity: 0
+    transition: .2s
+    
+
+    &--wrap
+        padding: 30px 70px
+
+        +mw(480)
+            padding: 30px 35px
+
+    &-consultant
+        position: absolute
+        left: -180px
+        bottom: 0
+
+        +mw(768)
+            display: none
+
+    &-form--wrap
+
+    &-form
+
+    &-form-title--top
+        font-family: 'Prosto One'
+        font-weight: 400
+        font-size: 48px
+        line-height: 56px
+
+        +mw(480)
+            font-size: 35px
+            line-height: 40px
+
+    &-form-title--bottom
+        font-weight: 600
+        font-size: 28px
+        line-height: 39px
+        padding-bottom: 22px
+
+        +mw(480)
+            font-size: 18px
+            line-height: 24px
+
+
+    &-form-input
+        width: 100%
+        border: 0.8px solid #1D1D1D
+        padding: 7px 20px
+        font-weight: 400
+        font-size: 14px
+        line-height: 29px
+        text-transform: uppercase
+        color: rgba(29, 29, 29, 0.5)
+        margin-bottom: 40px
+        
+
+    &-form-button
+        margin: 0 auto 20px
+        display: block
+
+        +mw(480)
+            width: 220px
+
+    &-form-consultant
+        display: flex
+        align-items: center
+
+        svg
+            flex-shrink: 0
+            display: block
+            margin-right: 10px  
+            min-width: 47px
+
+    &-form-consultant-name
+
+
+    &-close 
+        position: absolute
+        top: 15px
+        right: 15px
+        display: inline-block
+        width: 32px
+        height: 32px
+        padding: 0
+        border: none
+        background: none
+        cursor: pointer
+        opacity: .7
+        
+
+        &::before,
+        &::after 
+            content: ''
+            position: absolute
+            width: 100%
+            height: 2px
+            top: 50%
+            left: 0
+            background-color: #333
+        
+
+        &::before 
+            transform: rotate(45deg)
+        
+
+        &::after 
+            transform: rotate(-45deg)
+
+    &.opened-modal
+        opacity: 1 !important
+        top: 50%

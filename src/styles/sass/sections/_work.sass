@@ -1,0 +1,95 @@
+.work 
+    padding-bottom: 130px
+
+    &-adv
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 120px;
+        grid-row-gap: 40px; 
+        padding-bottom: 75px
+
+        &__item
+            font-family: 'Montserrat'
+            font-weight: 400
+            font-size: 20px
+            line-height: 24px
+            color: var(--c-grey)
+            position: relative
+
+            &::before
+                content: "\2605"
+                color: var(--c-blue)
+                font-weight: bold
+                display: inline-block
+                margin-left: -35px
+                font-size: 24px
+                position: absolute
+                top: 50%
+                transform: translateY(-50%)
+
+
+    &-form 
+        max-width: 560px
+
+        &__cats
+            display: flex
+            justify-content: space-between
+            margin-bottom: 50px
+            border-bottom: 3px solid #D9D9D9
+
+        &__cat
+            font-family: 'Montserrat'
+            font-weight: 400
+            font-size: 20px
+            line-height: 24px
+            text-transform: uppercase
+            color: var(--c-grey)
+            padding-bottom: 16px
+            cursor: pointer
+
+            &--active
+                position: relative
+                
+                &::before
+                    content: ""
+                    background: var(--c-orange)
+                    width: 100%
+                    display: inline-block
+                    position: absolute
+                    height: 4px
+                    bottom: -3px
+
+        &__list 
+
+        &__item 
+            padding: 35px 50px
+            font-size: 24px
+            line-height: 29px
+            color: var(--c-grey)
+            background: #fff
+            margin-bottom: 20px
+            border-radius: 15px
+
+        &__offer 
+            padding-top: 50px
+            p
+                padding-top: 10px
+                font-size: 24px
+                line-height: 29px
+                color: var(--c-grey)
+
+        &__link
+            font-weight: 900
+            color: var(--c-orange)
+            
+
+            &--style
+                border-bottom: 2px solid var(--c-orange)
+
+
+.work__arr
+    width: 22px
+    height: 15px
+                
+
