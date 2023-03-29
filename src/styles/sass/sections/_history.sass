@@ -1,3 +1,5 @@
+.history
+    position: relative
 .history__wrap 
     position: relative
 
@@ -17,14 +19,15 @@
     margin-top: 60px
     align-items: center
     justify-content: start
-    position: sticky
-    top: 50px    
+    // position: sticky
+    // top: 50px    
     
 
     &__arr
         width: 44px
         height: 36px
         margin-right: 50px
+        box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.15);
 
     &__num
         font-family: 'NeoSansW1G';
@@ -44,6 +47,7 @@
         max-width: 660px
         min-height: 255px
         padding: 60px
+        background: #fff
 
         &:nth-child(2n)
             background: var(--c-blue)
@@ -77,3 +81,13 @@
     position: absolute
     left: 0
     bottom: 150px
+
+.history__decor-circle
+    width: 100%
+    position: absolute
+    top: 250px
+
+.history__decor-circle-2
+    width: 100%
+    position: absolute
+    top: 1200px
