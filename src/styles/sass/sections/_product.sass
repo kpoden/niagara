@@ -28,7 +28,7 @@
     padding: 20px 30px
     border-radius: 10px
     cursor: pointer
-    transition: .2s
+    transition: .3s
 
 
     &--active
@@ -57,6 +57,11 @@
     position: absolute
     left: calc(100% - 350px)
     cursor: pointer
+    z-index: 100
+    transition: .2s
+
+    &:hover
+        filter: brightness(110%);
 
 .order__text 
     font-weight: 400
