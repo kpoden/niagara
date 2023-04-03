@@ -7,3 +7,12 @@
 	});
     console.log(reverseHandlersArr);
 </script>
+
+<picture class="orts-slider-slide-img">
+    {% if slide.img_mobile.url %}
+      <source media="(max-width: 768px)" srcset="{{ slide.img_mobile.url }}">
+      {% else %}
+        <source media="(max-width: 768px)" srcset="{{ slide.img_mobile }}">
+    {% endif %}
+      <img src="{{ slide.img_desktop }}" alt="">
+  </picture>

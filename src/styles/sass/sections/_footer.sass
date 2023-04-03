@@ -5,8 +5,12 @@
     border-radius: var(--border-rad-block)
     position: relative
 
+    +mw(600)
+        border-radius: 30px
+
     &__wrap 
         padding-bottom: 75px
+        padding: 0 15px
 
 
 
@@ -14,9 +18,18 @@
     position: relative
     width: 100%
     height: 700px
+    border-radius: 30px
+    overflow: hidden
+
+    +mw(500)
+        height: 195px
+        border-radius: 10px
     
     &__img
         position: absolute
+        width: 100%
+        height: 100%
+        object-fit: cover
 
 
     &__icon
@@ -24,6 +37,9 @@
         top: 48%
         left: 51%
         transform: translate(-50%, -50%)
+
+        +mw(800)
+            max-width: 16px
 
 
     &__adress
@@ -36,6 +52,33 @@
         background: var(--c-blue)
         box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
         padding: 45px 40px
+
+        +mw(1200)
+            right: 50px
+            top: 30px
+
+        +mw(500)
+            display: none
+
+    &__adress.mob
+        position: relative
+        top: 0
+        left: 0
+        margin-top: 30px
+        display: none
+        width: auto
+        max-width: 300px
+
+        +mw(500)
+            display: block
+            background: #ffffff
+            p
+                color: var(--c-grey)
+
+            svg
+                width: 22px;
+                height: 25px;
+
 
 
     &__adress-text 
@@ -54,6 +97,9 @@
     padding: 75px 0
     border-bottom: 1px solid #fff
 
+    +mw(600)
+        padding: 35px 0 30px
+
     &__phone
         font-size: 48px
         line-height: 59px
@@ -61,6 +107,15 @@
         letter-spacing: 0.05em
         text-transform: uppercase
         padding-bottom: 35px
+        white-space: nowrap
+
+        +mw(500)
+            font-size: 32px
+            line-height: 39px
+            padding-bottom: 20px
+
+        +mw(350)
+            font-size: 25px
 
 
 
@@ -71,6 +126,10 @@
         justify-content: space-between
         max-width: 800px
 
+        +mw(600)
+            flex-wrap: wrap
+            justify-content: center
+
     &__email
         font-size: 24px
         line-height: 29px
@@ -78,17 +137,38 @@
         letter-spacing: 0.05em
         text-transform: uppercase
 
+        +mw(600)
+            padding-bottom: 15px
+            font-size: 16px
+            line-height: 20px
+
 .footer__policy
     color: #fff
     padding: 40px 0
+    font-size: 16px
+    line-height: 20px
+
+    +mw(600)
+        font-size: 12px
+        line-height: 15px
 
 
 .footer__dec1
     position: absolute
     right: 180px
     top: -100px
+    filter: blur(9px)
+
+    +mw(600)
+        width: 93px
+        top: 3px
+        right: 45px
 
 .footer__dec2
     position: absolute
     bottom: 285px
     left: 534px
+    filter: blur(9px)
+
+    +mw(800)
+        display: none

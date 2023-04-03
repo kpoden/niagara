@@ -1,6 +1,10 @@
 .news
     background: #fff
     border-radius: var(--border-rad-block)
+    padding: 0 15px
+
+    +mw(600)
+        border-radius: 30px
 
     &__wrap
         padding-bottom: 230px
@@ -9,11 +13,21 @@
         display: flex
         flex-wrap: wrap
         gap: 35px
+        justify-content: space-between
+
+        +mw(850)
+            gap: 15px
 
 
 .news-item 
     width: calc(33% - 35px)
     cursor: pointer
+
+    +mw(850)
+        width: calc(50% - 15px)
+
+    +mw(500)
+        width: 100%
 
     &__img-wrap
         overflow: hidden
@@ -30,6 +44,9 @@
         line-height: 24px
         color: var(--c-grey)
 
+        +mw(500)
+            padding: 15px 30px 60px
+
 
 
 .news__spoiler
@@ -43,3 +60,6 @@
     text-decoration-line: underline;
     color: var(--c-grey)
     cursor: pointer
+
+    +mw(500)
+        padding-top: 0

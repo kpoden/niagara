@@ -3,6 +3,9 @@
     padding: 55px 80px
     color: #fff
 
+    +mw(900)
+        padding: 30px 20px
+
 
 
     &-top
@@ -16,6 +19,16 @@
             left: 0
             z-index: -1
             filter: brightness(50%)
+            // max-width: 100%
+            object-fit: cover
+            width: 100%
+            height: calc(100% + 150px)
+            border-radius: var( --border-rad-block) var( --border-rad-block) 0 0
+
+            +mw(600)
+                height: calc(100% + 100px)
+                border-radius: 30px 30px 0 0
+            
             
 
         &__logo 
@@ -27,10 +40,13 @@
                 height: 100%
 
     .n-menu
-        width: 46%
+        max-width: 46%
         max-width: 800px
         background: rgba(255, 255, 255, 0.15)
         border-radius: 90px
+        
+        +mw(1300)
+            display: none
 
         &__list 
             display: flex
@@ -43,6 +59,11 @@
             line-height: 24px
             letter-spacing: 0.1em
 
+        &__item:not(:last-child)
+            padding-right: 50px
+
+            +mw(1420)
+                padding-right: 25px
 
     .n-lang 
         width: 160px
@@ -51,6 +72,9 @@
         border-radius: 5px
         position: relative
         cursor: pointer
+
+        +mw(1300)
+            display: none
 
         &__switch
             position: absolute
@@ -91,6 +115,10 @@
     display: flex
     align-items: center
     padding-bottom: 15px
+
+    +mw(1300)
+        flex-direction: column-reverse
+        align-items: start
     
 
 .header-main__title 
@@ -104,3 +132,8 @@
     letter-spacing: 0.1em
     text-transform: uppercase
     width: 480px
+
+    +mw(800)
+        font-size: 20px
+        max-width: 280px
+        padding-bottom: 15px

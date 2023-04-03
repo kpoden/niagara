@@ -1,14 +1,20 @@
 .product 
     background-color: #fff
     border-radius: var(--border-rad-block)
+
+    +mw(600)
+        border-radius: 30px
     
 
     &__wrap
-        max-width: 1160px
+        max-width: 1190px
         margin: 0 auto
         width: 100%
         position: relative
-        padding-bottom: 130px
+        padding: 0 15px 130px
+
+        +mw(600)
+            margin-bottom: 100px
 
 
 
@@ -18,9 +24,27 @@
 
 .products-menu 
     display: flex
-    justify-content: space-between
     align-items: center
+    justify-content: space-between
+    flex-wrap: wrap
     padding-bottom: 75px
+    min-width: 300px
+
+    +mw(1200)
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 30px;
+        grid-row-gap: 15px; 
+
+    +mw(500)
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 20px;
+
+    +mw(350)
+        grid-column-gap: 10px;
+
 
 .products-menu__item 
     font-size: 24px
@@ -29,6 +53,23 @@
     border-radius: 10px
     cursor: pointer
     transition: .3s
+    text-align: center
+    white-space: nowrap
+
+
+    &:hover
+        background: #fd80276e
+        color: #000000
+
+
+    +mw(800)
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 15px
+        
+    +mw(370)
+        white-space: normal
+        padding: 10px
 
 
     &--active
@@ -43,6 +84,19 @@
 
 .products-list__item
     cursor: pointer
+    max-width: 370px
+    transition: .2s
+
+    +mw(600)
+        max-width: 254px
+
+    &:hover
+        filter: brightness(1.1)
+
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
 
 .product__order 
 
@@ -60,6 +114,14 @@
     z-index: 100
     transition: .2s
 
+    +mw(800)
+        margin-top: 50px
+        width: 306px
+        height: 149px
+
+    +mw(450)
+        left: 22px
+
     &:hover
         filter: brightness(110%);
 
@@ -69,10 +131,19 @@
     line-height: 20px
     width: 170px
 
+    +mw(800)
+        font-size: 12px
+        line-height: 15px
+        width: 121px
+
 .order__vol
     font-weight: 400
     font-size: 64px
     line-height: 78px
+
+    +mw(800)
+        font-size: 48px;
+        line-height: 59px;
 
 .order__arr
     position: absolute
@@ -80,6 +151,9 @@
     right: 70px
     width: 40px
     height: 35px
+
+    +mw(800)
+        top: 62px
 
 
 .product__decor
@@ -93,3 +167,6 @@
     line-height: 138px
     text-transform: uppercase
     color: #F8F8F8
+
+    +mw(1530)
+        display: none

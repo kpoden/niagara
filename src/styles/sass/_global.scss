@@ -29,6 +29,12 @@ h6 {
   position: relative;
 }
 
+@media (max-width: 800px) {
+  .container {
+    padding: 12px;
+  }
+}
+
 .wrap {
   max-width: 1160px;
   margin: 0 auto;

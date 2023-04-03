@@ -1,6 +1,9 @@
 .work 
     padding-bottom: 130px
 
+    +mw(550)
+        padding-bottom: 70px
+
     &__wrap
         position: relative
 
@@ -11,6 +14,19 @@
         grid-column-gap: 120px;
         grid-row-gap: 40px; 
         padding-bottom: 75px
+        padding-left: 35px
+
+        +mw(1000)
+            grid-column-gap: 60px
+            grid-row-gap: 30px
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+
+        +mw(480)
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            padding-bottom: 50px
+            grid-row-gap: 15px; 
 
         &__item
             font-family: 'Montserrat'
@@ -19,6 +35,14 @@
             line-height: 24px
             color: var(--c-grey)
             position: relative
+
+            +mw(480)
+                max-width: 100%
+                font-size: 16px;
+                line-height: 20px;
+                max-width: 250px
+
+
 
             &::before
                 content: "\2605"
@@ -41,6 +65,10 @@
             margin-bottom: 50px
             border-bottom: 3px solid #D9D9D9
 
+            +mw(550)
+                margin-bottom: 30px
+
+
         &__cat
             font-family: 'Montserrat'
             font-weight: 400
@@ -50,6 +78,10 @@
             color: var(--c-grey)
             padding-bottom: 16px
             cursor: pointer
+
+            +mw(550)
+                font-size: 12px
+                line-height: 15px
             
 
             &--active
@@ -76,6 +108,11 @@
             margin-bottom: 20px
             border-radius: 15px
 
+            +mw(550)
+                font-size: 20px
+                line-height: 24px
+                padding: 25px 30px
+
         &__offer 
             padding-top: 50px
             p
@@ -84,11 +121,19 @@
                 line-height: 29px
                 color: var(--c-grey)
 
+            +mw(550)
+                padding-top: 30px
+
+                p
+                    font-size: 16px
+                    line-height: 20px
+                    padding-top: 0
+
         &__link
             font-weight: 900
             color: var(--c-orange)
-            
 
+        
             &--style
                 border-bottom: 2px solid var(--c-orange)
 
@@ -102,3 +147,6 @@
     position: absolute
     bottom: -130px
     right: 0
+
+    +mw(1050)
+        display: none

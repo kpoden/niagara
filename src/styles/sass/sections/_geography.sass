@@ -1,9 +1,16 @@
 .geography 
     background: #fff
     border-radius: var(--border-rad-block)
+    padding: 0 15px;
+
+    +mw(600)
+        border-radius: 30px
 
 .geography__wrap 
     padding-bottom: 150px
+
+    +mw(800)
+        padding-bottom: 60px
     
 
 
@@ -16,6 +23,9 @@
         flex-wrap: wrap
         width: 510px
         padding-left: 20px
+
+        +mw(800)
+            width: 360px
         
 
     &__item
@@ -37,14 +47,38 @@
             width: 1em
             margin-left: -1em
 
+        +mw(800)
+            font-size: 16px
+            line-height: 20px
+
 .geography__map-wrap
     position: relative
 
 .map 
     padding-left: 55px
+    max-width: 100%
+
+    img
+        width: 100%
+
+    +mw(800)
+        padding-left: 0
+        padding-top: 50px
 
 
 .label 
     position: absolute
     top: 0
     right: 150px
+
+    +mw(1000)
+        right: 50px
+        max-width: 250px
+
+    +mw(800)
+        max-width: 125px
+        top: 20px
+        right: 30px
+
+        img
+            width: 100%
