@@ -1,18 +1,31 @@
+<head></head>
+<body>
+  <button id="printBtn">print</button>
+
+<h3 class="printContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quibusdam minima! Iure necessitatibus nisi repudiandae facilis nam, inventore a sapiente cupiditate consequatur cumque, commodi recusandae, ullam corporis quasi. Saepe, ipsa.</h3>
+
+</body>
+
 <script>
 
-    arr = [[1, 0], [0, 0], [0, 0]]
+const printBtn = document.querySelector("#printBtn");
 
-    reverseHandlersArr = arr.reverse().map((item) => {
-		return item.reverse();
-	});
-    console.log(reverseHandlersArr);
+const printContent = document. getElementsByTagName('html')[0].innerHTML;
+
+printBtn.addEventListener('click', ()=>{
+
+  var WinPrint = window.open('','','left=50,top=50,width=800,height=640,toolbar=0,scrollbars=1,status=0');
+  WinPrint.document.write('<div id="print" class="contentpane">');
+  WinPrint.document.write(printContent);
+  WinPrint.document.write('</div>');
+  // WinPrint.document.close();
+  // WinPrint.focus();
+  // WinPrint.print();
+  // WinPrint.close();
+
+
+    console.log('print');
+
+})
 </script>
 
-<picture class="orts-slider-slide-img">
-    {% if slide.img_mobile.url %}
-      <source media="(max-width: 768px)" srcset="{{ slide.img_mobile.url }}">
-      {% else %}
-        <source media="(max-width: 768px)" srcset="{{ slide.img_mobile }}">
-    {% endif %}
-      <img src="{{ slide.img_desktop }}" alt="">
-  </picture>
