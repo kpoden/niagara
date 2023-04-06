@@ -92,3 +92,15 @@
     opacity: 0;
 }
 
+.fixedBlock {
+    position: fixed !important;
+    max-width: inherit;
+    width: 100%;
+    top: 0;
+    margin-top: 0 !important;
+}
+
+.hiddenBlock {
+    opacity: 0;
+    top: 150px !important;
+}
