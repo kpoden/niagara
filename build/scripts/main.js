@@ -150,7 +150,7 @@ function videoAppear() {
 
 }
 
-// videoAppear();
+videoAppear();
 
 
 
