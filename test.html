@@ -1,31 +1,187 @@
-<head></head>
-<body>
-  <button id="printBtn">print</button>
+<div class="section first-section">
+ Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
+ Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
+ Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
+ Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
+ Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div class="section second-section">
+  <!-- content for second section goes here -->
+  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
+  Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
+  Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
+  Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
+  Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div class="section third-section">
+  <!-- content for third section goes here -->
+  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
+  Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
+  Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
+  Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
+  Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
 
-<h3 class="printContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, quibusdam minima! Iure necessitatibus nisi repudiandae facilis nam, inventore a sapiente cupiditate consequatur cumque, commodi recusandae, ullam corporis quasi. Saepe, ipsa.</h3>
+<style>
+  .section {
+  height: 100vh;
+  width: 100%;
+}
 
-</body>
+.first-section {
+  background-color: #ccc;
+}
 
+.second-section {
+  background-color: #aaa;
+  position: absolute;
+  top: 100vh;
+  left: 0;
+}
+
+.third-section {
+  background-color: #888;
+  position: absolute;
+  top: 200vh;
+  left: 0;
+}
+
+</style>
 <script>
+  window.addEventListener('scroll', function() {
+  var secondSection = document.querySelector('.second-section');
+  var thirdSection = document.querySelector('.third-section');
+  var distanceFromTop = secondSection.getBoundingClientRect().top;
 
-const printBtn = document.querySelector("#printBtn");
+  if (distanceFromTop < window.innerHeight) {
+    secondSection.style.transform = 'translateY(' + (window.innerHeight - distanceFromTop) + 'px)';
+    thirdSection.style.transform = 'translateY(' + (window.innerHeight * 2 - distanceFromTop) + 'px)';
+  } else {
+    secondSection.style.transform = '';
+    thirdSection.style.transform = '';
+  }
+});
 
-const printContent = document. getElementsByTagName('html')[0].innerHTML;
+function tracksMove(moveHeight) {
+    
+    
+    
+    moveHeight = moveHeight || 50;
+    
+    
+    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
+    const decor_texts = $('.decor_text, .decor_num, .decor_length');
+    
+    const montage = document.querySelector('.montage_length');
+    
+    if (montage.style.display === 'none') {
+        
+        if(!montage.classList.contains('moved')){
+             decor_texts.each(function() {
+              let currentTop = $(this).position().top;
+              $(this).css('top', currentTop - 50);
+              montage.classList.add('moved');
+        })
+      }
+        
+         
+      
+    
+    } else {
+      decor_texts.each(function() {
+      let currentTop = $(this).position().top;
+      $(this).css('top', currentTop + 50);
+    });
+    }
+    
+    track_texts.each(function() {
+        
+      let currentTop = $(this).position().top;
+      $(this).css('top', currentTop - moveHeight + movedTracks);
+    });
+    
+    movedTracks = moveHeight;
+}
 
-printBtn.addEventListener('click', ()=>{
+let movedTracks = 0;
+let movedDecs = 0;
 
-  var WinPrint = window.open('','','left=50,top=50,width=800,height=640,toolbar=0,scrollbars=1,status=0');
-  WinPrint.document.write('<div id="print" class="contentpane">');
-  WinPrint.document.write(printContent);
-  WinPrint.document.write('</div>');
-  // WinPrint.document.close();
-  // WinPrint.focus();
-  // WinPrint.print();
-  // WinPrint.close();
+function decorMove(decMovePx) {
+    const decor_texts = $('.decor_text, .decor_num, .decor_length');
+    const montage = document.querySelector('.montage_length');
+    
+
+        if(!montage.classList.contains('moved')){
+             decor_texts.each(function() {
+              $(this).addClass('dec_marg');
+        })
+        
+      } 
+}
+
+function tracksMove(moveHeight) {
+    
+    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
+    if(moveHeight == 1) {
+      track_texts.each(function() {
+      $(this).addClass('tracks_marg1');
+    });
+    } else if(moveHeight == 2) {
+        track_texts.each(function() {
+        $(this).addClass('tracks_marg2');
+    })
+  }
+    
+
+    
+    movedTracks = moveHeight;
+    console.log('Moved ' + moveHeight)
+}
 
 
-    console.log('print');
+function tracksMove(moveHeight) {
+    
+    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
+    if(moveHeight == 1) {
+      track_texts.each(function() {
+      $(this).removeClass('track_marg1');
+      $(this).removeClass('track_marg2');
+      $(this).removeClass('track_marg3');
+      $(this).removeClass('track_marg0');
+      $(this).addClass('track_marg1');
+      console.log('track_marg1');
+    });
+    } else if(moveHeight == 2) {
+        track_texts.each(function() {
+        $(this).removeClass('track_marg1');
+        $(this).removeClass('track_marg2');
+        $(this).removeClass('track_marg3');
+        $(this).removeClass('track_marg0');
+        $(this).addClass('track_marg2');
+        console.log('track_marg2');
+    })
+    } else if(moveHeight == 3) {
+        $(this).removeClass('track_marg1');
+        $(this).removeClass('track_marg2');
+        $(this).removeClass('track_marg3');
+        $(this).removeClass('track_marg0');
+        $(this).addClass('track_marg3');
+        console.log('track_marg3');
+    } else if(moveHeight == 0) {
+        $(this).removeClass('track_marg1');
+        $(this).removeClass('track_marg2');
+        $(this).removeClass('track_marg3');
+        $(this).removeClass('track_marg0');
+        console.log('track_marg0');
+    }
+    
 
-})
+    
+    movedTracks = moveHeight;
+    console.log('Moved ' + moveHeight)
+}
 </script>
 

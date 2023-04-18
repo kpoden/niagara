@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -56,7 +56,7 @@
       </video>
       <picture class="pecs">
         <source media="(max-width: 799px)" srcset="images/header/header-1-mob.png">
-        <img src="images/header/header-1.png" alt="Фон" class="header-top__bg">
+        <img src="images/header/header-1.png" alt="Фон" class="header-top__bg hidden">
         <img src="images/header/pecs/pec-2.png" alt="Фон" class="header-top__bg hidden">
         <img src="images/header/pecs/pec-3.png" alt="Фон" class="header-top__bg hidden">
         <img src="images/header/pecs/pec-4.png" alt="Фон" class="header-top__bg hidden">
@@ -124,8 +124,8 @@
           </ul>
 
           <div class="products__list products-list">
-            <div class="products-list__item" data-type="gas"><img src="images/product/prod-1.png" alt=""></div>
-            <div class="products-list__item" data-type="gas"><img src="images/product/prod-2.png" alt=""></div>
+            <div class="products-list__item  modal-trigger-prod" data-type="gas"><img src="images/product/prod-1.png" alt=""></div>
+            <div class="products-list__item  modal-trigger-prod" data-type="gas"><img src="images/product/prod-2.png" alt=""></div>
             <div class="products-list__item" data-type="gas"><img src="images/product/prod-3.png" alt=""></div>
             <div class="products-list__item" data-type="gas"><img src="images/product/prod-4.png" alt=""></div>
             <div class="products-list__item" data-type="gas"><img src="images/product/prod-5.png" alt=""></div>
@@ -169,29 +169,29 @@
 
         <div class="mission__adv mission-adv element-animation">
           <div class="mission-adv__item">
-            <div class="mission-adv__text counter">
-              <span class="mission-adv__top-text" data-count="22">22</span>
+            <div class="mission-adv__text ">
+              <span class="mission-adv__top-text counter" data-count="22">22</span>
               <span class="mission-adv__subtext">года на рынке</span>
             </div>
           </div>
 
           <div class="mission-adv__item">
-            <div class="mission-adv__text counter">
-              <span class="mission-adv__top-text" data-count="2">2</span>
+            <div class="mission-adv__text ">
+              <span class="mission-adv__top-text counter" data-count="2">2</span>
               <span class="mission-adv__subtext">завода <br> в России</span>
             </div>
           </div>
 
           <div class="mission-adv__item">
-            <div class="mission-adv__text counter">
-              <span class="mission-adv__top-text" data-count="10">10</span>
+            <div class="mission-adv__text ">
+              <span class="mission-adv__top-text counter" data-count="10">10</span>
               <span class="mission-adv__subtext">ТОП-10 крупнейших производителей напитков</span>
             </div>
           </div>
 
           <div class="mission-adv__item">
             <div class="mission-adv__text">
-              <span class="mission-adv__top-text" data-count="50">50</span>
+              <span class="mission-adv__top-text counter" data-count="50">50</span>
               <span class="mission-adv__subtext">наград за качество продукции</span>
             </div>
           </div>
@@ -215,7 +215,7 @@
               <use xlink:href="images/sprite.svg#year_arr"></use>
             </svg> -->
             <img src="images/history/arr.png" class="year__arr" alt="">
-            <span class="year__num">2000 г</span>
+            <span class="year__num">1990 г</span>
 
           </div>
           <div class="rail__events events">
@@ -555,13 +555,13 @@
           </div>
         </div>
 
-        <p class="footer__policy"><a href="#" target="_blank">Политика конфиденциальности</a></p>
+        <p class="footer__policy"><a href="policy.html" target="_blank">Политика конфиденциальности</a></p>
       </div>
       <img src="images/dec-circle.png" alt="" class="footer__dec1">
       <img src="images/dec-circle.png" alt="" class="footer__dec2">
     </footer>
 
-    <div class="modal" id="modal">
+    <div class="modal" id="modal-news">
       <span class="modal__close"></span>
       <div class="modal__wrap">
         <div class="modal__images">
@@ -585,6 +585,159 @@
       </div>
     </div>
 
+    <div class="modal opened-modal product-modal" id="modal-prod">
+
+      <span class="modal__close"></span>
+
+      <div class="product-modal__header pm-header">
+        <div class="pm-header__decor"></div>
+        <div class="pm-header__title">
+          <p class="pm-header__title-sub">Газированный напиток на основе трав и ягод</p>
+          <div class="pm-header__title-main">
+            <img src="images/products/taezhniy/logo-td.png" alt="">
+          </div>
+
+
+
+        </div>
+
+        <div class="pm-header__flavours flavours">
+          <h2 class="flavours__title">5 вкусов:</h2>
+          <div class="flavours__choose">
+            <div class="flavours__item flavours--active">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-1.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+
+            <div class="flavours__item ">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-2.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+
+            <div class="flavours__item">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-3.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+
+            <div class="flavours__item">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-4.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+
+            <div class="flavours__item">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-5.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+            <!-- 
+            <div class="flavours__item">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-1.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div>
+
+            <div class="flavours__item">
+              <div class="flavours__img-wrap">
+                <img class="flavours__img" src="images/products/taezhniy/flav-1.png" alt="Черника на травах">
+              </div>
+              <span class="flavours__name">Черника на травах</span>
+            </div> -->
+   
+          </div>
+
+
+        </div>
+
+        <div class="pm-header__display prod-display">
+          <picture class="prod-display__img">
+            <!-- <source media="(max-width: 799px)" srcset="images/header/header-1-mob.png"> -->
+            <img src="images/products/taezhniy/td-big-chnt.png" alt="Таежный дар">
+          </picture>
+
+          <div class="prod-display__switch prod-switch vol-quant-2">
+            <div class="prod-switch__wrap">
+              <span class="prod-switch__switch"></span>
+              <div class="prod-switch__vol">
+                <span>1.45л</span> 
+              </div>
+              <div class="prod-switch__vol">
+                <span>0.5л</span> 
+              </div>
+            </div>
+          </div>
+        </div>
+        
+   
+      </div>
+
+      <div class="product-modal__adv pm-adv">
+      
+        <div class="pm-adv__item">
+          <div class="pm-adv__img">
+            <img src="images/products/taezhniy/icons/icon-1.png" alt="">
+          </div>
+          <h3 class="pm-adv__title">100% натуральные ингредиенты</h3>
+          <p class="pm-adv__text">полностью отказались от консервантов «бензоат натрия» и «сорбат калия».</p>
+        </div>
+      
+        <div class="pm-adv__item">
+          <div class="pm-adv__img">
+            <img src="images/products/taezhniy/icons/icon-2.png" alt="">
+          </div>
+          <h3 class="pm-adv__title">100% натуральные ингредиенты</h3>
+          <p class="pm-adv__text">полностью отказались от консервантов «бензоат натрия» и «сорбат калия».</p>
+        </div>
+      
+        <div class="pm-adv__item">
+          <div class="pm-adv__img">
+            <img src="images/products/taezhniy/icons/icon-3.png" alt="">
+          </div>
+          <h3 class="pm-adv__title">100% натуральные ингредиенты</h3>
+          <p class="pm-adv__text">полностью отказались от консервантов «бензоат натрия» и «сорбат калия».</p>
+        </div>
+        
+      </div>
+
+      <div class="prod-info">
+        <div class="prod-info__wrap">
+          <div class="prod-info__decor">
+            <img src="images/products/taezhniy/blur.png" alt="">
+          </div>
+          <picture class="prod-info__bg">
+            <source media="(max-width: 599px)" srcset="images/products/taezhniy/info-s.png">
+            <img class="prod-info__img" src="images/products/taezhniy/info.png" alt=""></img>
+          </picture>
+          <div class="prod-info__text">
+            <p>Чтобы сохранить богатый вкус и природный состав, все растительные основы для напитка мы бережно собираем на Дальнем Востоке и высушиваем без использования солнечного света.</p>
+            <p>Температура приготовления растительных основ, необходимая для сохранения полезных свойств трав и ягод составляет не более 60°С.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-tiger">
+        <div class="prod-tiger__info">
+          <img class="prod-tiger__img" src="images/products/taezhniy/tiger.png">
+          <h2 class="prod-tiger__title">
+            Спасаем <span class="bolder">тигров</span>
+          </h2>
+
+          <div class="prod-tiger__text">
+            <p>С апреля 2013 года с каждой проданной бутылки напитка «Таёжный Дар» часть средств поступает на счет Национального парка «Зов тигра» — одно из немногих мест в России и Мире, где до сих пор обитает Амурский тигр.</p>
+            <p>Благодаря поддержке «Таёжного Дара» тигры получили дополнительный уход, еду и защиту от браконьеров. На данный момент в мире насчитывается всего 450 особей амурского тигра, но мы рассчитываем, что с нашей поддержкой это число будет непрерывно увеличиваться!</p>
+          </div>
+        </img>
+      </div>
+
 
 
 
@@ -594,13 +747,34 @@
   </main>
   
   <!-- end of container -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" ></script>
+  <script>
+    $(function(){
+     var id = '.header,.mission,.history,.work,.news';
+     $('head').append('<style>body {overflow-x: hidden;}#allrecords {overflow: visible !important;}#t-header,#t-footer {position: relative;z-index: 2;} .t-rec {position: relative;z-index: 1;overflow-x: hidden;}'+id+' { position: -webkit-sticky; position: sticky; top: 0; z-index: 0;}</style>');
+     $(window).on('load resize', function(){
+        $(id).each(function(){
+         var topPosition = $(window).height() - $(this).height();
+         if (topPosition < 0) {
+            $(this).css('top',topPosition)
+         } else {
+            $(this).css('top',0)
+         }
+        });
+     });
+    });
+</script>
+<style>
+    .header, .mission,.history{background: #F2F2F2; z-index: 0;}
+    .work{background: #F2F2F2;}
+</style>
 
-  <!-- <script src="libs/jquery-3.6.0.min.js"></script> -->
-  <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="libs/swiper-bundle.min.js"></script> -->
+ 
+  <script src="libs/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
   <script src="scripts/main.js"></script>
 </body>
 

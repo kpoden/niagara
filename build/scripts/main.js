@@ -1,4 +1,123 @@
 
+function parallex() {
+  const ypos = window.pageYOffset;
+  const header = $('.header').height();    
+  if(ypos-header>135){
+      $('.header').css({'opacity':0})
+  }else{
+      $('.header').css({'opacity':1})
+  }
+  }
+  window.addEventListener('scroll', parallex), false;
+
+
+
+function fixBlocks(){
+  function parallex() {
+      ypos = window.pageYOffset;
+      const header = document.querySelector('.header');
+      const product = document.querySelector('.product');
+      const history = document.querySelector('.history');
+      const geography = document.querySelector('.geography');
+      const work = document.querySelector('.work');
+      const news = document.querySelector('.news');
+      const footer = document.querySelector('.footer');
+  
+      if(ypos>0 && ypos<900){
+       var top = 0 - ypos;
+       header.style.position = 'fixed';
+       header.style.padding = '55px 65px 55px';
+       product.style.top = '876px';
+      }
+      if(ypos>900){
+       header.style.position = 'relative';
+       product.style.top = '0';
+      }
+      if(ypos>4916){
+       var top = (4916 - ypos)*.5;
+       var top1 = -4916 + ypos;
+       history.style.position = 'relative';
+       history.style.top = top1+'px';
+       geography.style.top = top+'px';
+       geography.style.marginBottom = top+'px';
+       geography.style.position = 'relative';
+  
+      }
+      if(ypos>5784){
+       history.style.top = 'auto';
+      }
+      if(ypos>6545){
+       geography.style.top = '-814px';
+       geography.style.marginBottom = '-814px';
+      }
+      if(ypos>6580){
+       var top = 6580 - ypos;
+       var top1 = -6580 + ypos;
+       if(344 < top1){
+          var top1 = 344;
+       }
+  
+       work.style.position = 'relative';
+       work.style.top = top1+'px';
+       news.style.top = top+'px';
+       news.style.marginBottom = top+'px';
+       news.style.position = 'relative';
+      }
+      if(ypos>7030){
+       var top = 7030 - ypos;
+       var top1 = (-7030 + ypos)-450;
+       if(-100 < top1){
+          var top1 = -100;
+          var mar = -800;
+          news.style.marginBottom = mar+'px';
+       }
+       news.style.top = top1+'px';
+       footer.style.top = top+'px';
+       footer.style.marginBottom = top+'px';
+       footer.style.position = 'relative';
+  
+      }
+  
+  
+  }
+  window.addEventListener('scroll', parallex), false;
+  }
+  // fixBlocks()
+
+
+
+function sectionsFix() {
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const allSections = document.querySelectorAll('.n-block');
+
+  for (let i = 0; i < 2; i++) {
+    const section = allSections[i];
+
+    section.classList.add('unfixed');
+    section.style.top = (viewportHeight) + 'px';
+
+    document.addEventListener('scroll', () => {
+      console.log(section.getBoundingClientRect().top);
+      if (section.getBoundingClientRect().top < 5) {
+        
+        section.classList.add('fixedBlock');
+        section.style.top = '0px';
+      } else {
+        section.classList.remove('fixedBlock');
+      }
+
+    
+  })
+}
+}
+
+
+// sectionsFix()
+
+
+
+
+
 function scrollBlocks() {
 
   const yearNum = document.querySelector('.year__num');
@@ -13,7 +132,7 @@ function scrollBlocks() {
 
     document.addEventListener('scroll', () => {
 
-      if (block.getBoundingClientRect().top < (viewportHeight / 2) + 150) {
+      if (block.getBoundingClientRect().top - 100 < (viewportHeight / 2) + 150) {
         block.classList.remove('hiddenBlock');
         block.classList.add('visibleBlock');
       } else {
@@ -22,51 +141,22 @@ function scrollBlocks() {
       }
 
       const visBlocks = document.querySelectorAll('.visibleBlock');
-      let yearNew = parseFloat(visBlocks[visBlocks.length - 1].dataset.year);
-      let yearOld = parseFloat(yearNum.innerText);
+      if(visBlocks.length > 1) {
+        let yearNew = parseFloat(visBlocks[visBlocks.length - 1].dataset.year);
+        let yearOld = parseFloat(yearNum.innerText);
+        yearNum.innerText = yearNew;
 
-      yearNum.innerText = yearNew;
+      }
+      
 
-    //   function updateCount() {
-
-    //     if(yearOld < yearNew) {
-    //       yearOld++;
-    //       yearNum.innerText = yearOld;
-    //       setTimeout(updateCount, 500);
-    //     } else {
-    //       yearNum.innerText = yearNew;
-    //     }
-
-    // }
-
-    // updateCount()
-
-
-
+      
     })
 
   }
 
-
-
-//   scrollBlocks.forEach(block => {
-//       block.classList.add('hiddenBlock');
-//       document.addEventListener('scroll', () => {
-
-
-//       if(block.getBoundingClientRect().top < (viewportHeight/2) + 150) {
-
-//         block.classList.remove('hiddenBlock');
-//         console.log(block.dataset.year);
-//       }
-//   })
-// })
 }
 
-
-
-scrollBlocks()
-
+scrollBlocks();
 
 
 
@@ -81,7 +171,7 @@ function onEntry(entry) {
     }
   });
 }
-let options = { threshold: [0.9] };
+let options = { threshold: [0.1] };
 let observer = new IntersectionObserver(onEntry, options);
 let elements = document.querySelectorAll('.element-animation');
 
@@ -91,28 +181,47 @@ for (let elm of elements) {
 
 
 function counters() {
-  const counters = document.querySelectorAll('.mission-adv__top-text');
+  const counters = document.querySelectorAll( '.counter' );
+	
+    jQuery(function ($) {
+        "use strict";
+      
+        var counterUp = window.counterUp["default"];
+      
+      
+        counters.forEach((counter=>{
+          counterUp( counter, {
+            duration: 1000,
+            delay: 5,
+        } )
+        }))
+       
+  
+    });
 
-  counters.forEach((counter)=> {
-      counter.innerText = 0;
-      let count = 0;
+//   const counters = document.querySelectorAll('.mission-adv__top-text');
 
-      function updateCount() {
-        const target = parseFloat(counter.dataset.count);
+//   counters.forEach((counter)=> {
+//       counter.innerText = 0;
+//       let count = 0;
 
-        if(count < target) {
-          count++;
-          counter.innerText = count;
-          setTimeout(updateCount, 150);
-        } else {
-          counter.innerText = target;
-        }
+//       function updateCount() {
+//         const target = parseFloat(counter.dataset.count);
 
-    }
+//         if(count < target) {
+//           count++;
+//           counter.innerText = count;
+//           const duration = 4000/target;
+//           setTimeout(updateCount, duration);
+//         } else {
+//           counter.innerText = target;
+//         }
 
-    updateCount();
+//     }
 
-  })
+//     updateCount();
+
+//   })
 
 }
 
@@ -150,7 +259,7 @@ function videoAppear() {
 
 }
 
-videoAppear();
+// videoAppear();
 
 
 
@@ -383,10 +492,10 @@ gsap.to(".order", {
 
 
     class Modal {
-      constructor(modalId) {
+      constructor(modalId, trigger) {
         this.modal = document.getElementById(modalId);
         this.closeButton = this.modal.querySelector('.modal__close');
-        this.modalTrigger = document.querySelectorAll('.modal-trigger');
+        this.modalTrigger = document.querySelectorAll(trigger);
         this.overlay = document.querySelector('.overlay-dark');
         this.isOpen = false;
         this.closeButton.addEventListener('click', () => this.close());
@@ -417,6 +526,43 @@ gsap.to(".order", {
       }
     }
 
-    const modal = new Modal('modal');
+    const modalNews = new Modal('modal-news', '.modal-trigger');
 
-    modal.init()
+    modalNews.init();
+
+    const modalProd = new Modal('modal-prod', '.modal-trigger-prod');
+
+    modalProd.init();
+
+
+class Product {
+  constructor(prodId) {
+    this.chooseFlav = document.querySelectorAll('.flavours__item');
+    this.chooseVolIcon = document.querySelector('.prod-switch');
+    this.chooseVolSwitch = document.querySelector('.prod-switch__switch');
+
+
+  }
+
+  chooseFlavor() {
+    this.chooseFlav.forEach((el) =>
+      el.addEventListener('click', () => {
+        this.chooseFlav.forEach(el => el.classList.remove('flavours--active'));
+        el.classList.add('flavours--active')
+      }
+      )
+    )
+  }
+
+  chooseVol() {
+    this.chooseVolIcon.addEventListener('click', () => {
+      this.chooseVolSwitch.classList.toggle('switched');
+    })
+  }
+
+}
+
+const td = new Product('td');
+
+td.chooseFlavor();
+td.chooseVol();
