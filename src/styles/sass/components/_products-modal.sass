@@ -1,32 +1,45 @@
+
+
+    
+
+
+    
 .product-modal
-    width: 85%
-    max-width: 1360px
-    padding: 20px
-    height: auto
-    position: absolute
-    top: -50%
+    width: 85%;
+    max-width: 1360px;
+    min-width: 340px;
+    height: auto;
+    position: absolute;
+    top: -1000%;
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%)
+    background: transparent
 
     &.opened-modal
-        opacity: 1 !important
-        top: 150px
+        opacity: 1 !important;
+        top: 150px;
+
+    +mw(700)
+        padding: 15px
+
+    
 
     .modal
 
         &__close
             position: absolute
-            top: -60px
+            top: -40px
             left: -60px
             display: inline-block
             width: 59px
             height: 59px
             padding: 0
             border: none
-            background: none
+            background: #fff
             cursor: pointer
             opacity: 1
-            background: #fff
             border-radius: 50%
+            transition: .2s
 
             &::before,
             &::after 
@@ -37,12 +50,46 @@
                 top: 50%
                 left: 50%
                 background-color: #333
+                transition: .2s
+
+                
+
+                +mw(800)
+                    width: 20px
+
+                
+
+                
 
             &::before 
                 transform: translate(-50%, -50%) rotate(45deg)
             
+            
             &::after 
                 transform: translate(-50%, -50%) rotate(-45deg)
+
+                
+                
+
+            &:hover
+                margin-top: -5px
+
+            // &:hover::after
+            //     width: 35px
+
+            // &:hover::before
+            //     width: 35px
+
+            +mw(800)
+                width: 40px
+                height: 40px
+                left: -30px
+
+            +mw(430)
+                left: 0px
+                top: -30px
+
+            
 
     &__header
         padding: 20px
@@ -56,11 +103,18 @@
     .pm-header
         display: grid
         grid-template-columns: repeat(5, 1fr)
-        grid-template-rows: repeat(2, 1fr)
+        grid-template-rows: 1fr  auto
         grid-column-gap: 0px
         grid-row-gap: 0px
         position: relative
         overflow: hidden
+        grid-auto-rows: auto
+        // position: sticky
+        // top: -50% 
+
+        +mw(1000)
+            grid-template-columns: repeat(2, 1fr)
+            grid-template-rows: repeat(4, auto)
 
         &__decor
             position: absolute
@@ -72,9 +126,31 @@
             border-radius: 50%
             z-index: 0
 
+        &__decorbg
+            width: 100%
+            height: 100%
+            position: absolute
+
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+                background-position: left bottom
+
+        &__plashka
+            position: absolute
+            z-index: -1
+            left: -100px
+            padding-top: 100px
+
         &__title
-            grid-area: 1 / 1 / 3 / 4
+            grid-area: 1 / 1 / 2 / 4
             z-index: 1
+            height: 470px
+
+            +mw(1000)
+                  grid-area: 1 / 1 / 2 / 3  
+                  height: auto
 
 
             &-sub
@@ -91,23 +167,88 @@
                 margin-left: auto
                 padding-top: 100px
 
+                +mw(1300)
+                    padding-top: 50px
+
+                +mw(1000)
+                    margin: 0 auto
+                    font-size: 16px
+                    max-width: none
+
 
             &-main
                 img
                     margin-left: auto
                     display: block
                     padding-top: 40px
+                    max-width: 100%
+
+                    +mw(1000)
+                        margin: 0 auto
+
 
         &__flavours
             grid-area: 2 / 1 / 4 / 4
             z-index: 1
             padding-top: 50px
+            display: flex
+            flex-direction: column
+            justify-content: start
+            padding-bottom: 50px
+
+            +mw(1000)
+                grid-area: 4 / 1 / 5 / 3
 
         &__display
              grid-area: 1 / 4 / 4 / 6
              z-index: 1
              display: flex
              align-items: center
+             justify-content: space-between
+             position: relative
+             padding-left: 20%
+             padding-top: 50px
+             height: 900px
+
+             +mw(1000)
+                grid-area:  2 / 1 / 4 / 3
+                height: 700px
+                padding-left: 0
+
+             +mw(700)
+                height: 500px
+
+
+
+        .prod-display
+            
+                
+
+             &__img
+                height: 100%
+                transform: scale(0.3)
+                opacity: 0.5
+                transition: all .7s ease .1s;
+                
+                +mw(1300)
+
+                +mw(1000)
+                    transform: scale(1)
+                    margin: 0 auto
+
+                img
+                    width: 100%
+                    height: 80%
+                    object-fit: contain
+
+                    +mw(1200)
+                        padding-right: 20px
+
+                    +mw(1000)
+                        padding-right: 0
+                        height: 100%
+                    
+
 
             
 
@@ -116,6 +257,12 @@
 
 .flavours 
     padding-left: 100px
+
+    +mw(1200)
+        padding-left: 30px
+
+    +mw(1000)
+        padding-left: 0px
 
     &__title
         font-family: 'NeoSansW1G'
@@ -130,6 +277,9 @@
         display: flex
         flex-wrap: wrap
         align-items: center
+
+        // +mw(1200)
+        //     justify-content: space-between
         
 
     &__item 
@@ -139,15 +289,37 @@
         flex-direction: column
         justify-content: center
         align-items: center
+        height: 220px
+
+        +mw(1200)
+            height: 160px
+
+        +mw(1000)
+            width: 25%
+
         
 
  
     &__img-wrap
         width: 150px
-        height: 170px
+        height: 150px
         border-radius: 50%
         position: relative
         margin-bottom: 8px
+
+        +mw(1500)
+            width: 130px
+            height: 130px
+
+        +mw(1200)
+            width: 110px
+            height: 110px
+
+        +mw(1000)
+            width: 60px
+            height: 60px
+
+
 
     &__img
         position: absolute
@@ -155,6 +327,13 @@
         left: 50%
         transform: translate(-50%, -50%)
         margin: 0 auto
+        max-width: 60px
+
+        +mw(1200)
+            max-width: 45px
+            max-height: 60px
+
+        
 
     &__name
         font-family: 'Montserrat'
@@ -164,6 +343,16 @@
         text-align: center
         color: rgba(255, 255, 255, 0.4);
         display: block
+        width: 65%
+
+        +mw(1200)
+            font-size: 14px
+
+        +mw(1000)
+            font-size: 12px
+
+        +mw(800)
+            font-size: 10px
 
     &--active .flavours__img-wrap
         border: 2px solid #E1E1E1
@@ -171,22 +360,44 @@
         width: 170px
         z-index: 1000
 
+
+        +mw(1500)
+            width: 140px
+            height: 140px
+
+        +mw(1200)
+            width: 120px
+            height: 120px
+
+        +mw(1000)
+            width: 70px
+            height: 70px
+
+
     &--active .flavours__name
         color: #ffffff
 
 
 
 
+.switch-wrap
+    width: 60px
 
+.vol-quant-2
+    height: 172px
+
+.vol-quant-3
+    height: 235px
 
 .prod-switch
-    width: 60px
-    height: 172px
+    min-width: 60px
     border: 1px solid rgba(255, 255, 255, 0.5)
     border-radius: 90px
-    margin-left: -80px
     position: relative
+    max-width: 100%
     cursor: pointer
+
+ 
     
 
     &__wrap 
@@ -200,6 +411,7 @@
     &__vol
         height: 86px
         position: relative
+        width: 100%
 
         span
             position: absolute
@@ -223,18 +435,26 @@
         top: 0
         transition: .2s
 
-.switched
+.vol-quant-2 .switched
     top: 84px
 
+.vol-quant-3 .switched
+    top: 73px
+
+.vol-quant-3 .switched2
+    top: 146px
 
 
 
-.pm-adv 
-    padding: 136px 200px 100px
+
+.pm-adv__wrapper
+    padding: 136px 150px 100px
     display: flex
     justify-content: space-between
-    align-items: center
     gap: 50px
+    background: #fff
+    position: relative
+    
 
     +mw(1200)
         padding: 136px 100px 100px
@@ -247,12 +467,22 @@
         flex-direction: column
         align-items: start
         
+.pm-adv
+    position: relative
+    // position: sticky !important
+    // top: 0
 
-
-    &__item 
+    &__item
+        flex: 1
 
         +mw(800)
             max-width: 260px
+
+        li
+            list-style: disc
+
+        a
+            text-decoration: underline
             
 
     &__img
@@ -277,6 +507,11 @@
 .prod-info
     border-radius: 30px
     overflow: hidden
+    min-height: 660px
+    margin-top: -30px
+
+    +mw(1000)
+        min-height: 550px
     
     
     &__wrap
@@ -299,7 +534,11 @@
         width: 100%
         height: 100%
         z-index: 0
-        
+        border-radius: 30px
+        overflow: hidden
+        min-height: 660px
+        +mw(1000)
+            min-height: 550px
         
 
     &__img
@@ -311,7 +550,7 @@
         max-width: 500px
         padding: 170px 0px 200px 80px
         font-size: 24px
-        line-height: 29px
+        // line-height: 29px
         color: #FFFFFF
         position: relative
         z-index: 2
@@ -329,6 +568,9 @@
 .prod-tiger
     position: relative
     border-radius: 30px
+    background: #fff
+    // position: sticky
+    // top: 0
 
     &__img
         position: absolute
@@ -344,7 +586,7 @@
             max-width: 100%
 
     &__info
-        padding: 130px 10vw 130px 0
+        padding: 130px 5vw 130px 0
         max-width: 55%
         margin-left: auto
 
@@ -369,3 +611,95 @@
         p
             &:not(:last-child)
                 padding-bottom: 50px
+
+
+.low
+    position: absolute
+    top: -39px
+    left: 50%
+    transform: translateX(-50%)
+    margin-bottom: -5px
+    cursor: pointer
+
+    &:hover .low__arr
+        opacity: 1
+        bottom: 10px
+
+
+    &__img 
+
+    &__arr
+        content: ''
+        position: absolute
+        width: 15px
+        height: 15px
+        border: solid #5A5A5A
+        border-width: 0 3px 3px 0
+        bottom: 15px
+        left: 50%
+        transform: translateX(-50%) rotate(45deg)
+        opacity: 0.5
+        transition: .2s
+
+        
+
+.pm-star
+    position: absolute
+    top: 172px
+    left: 20%
+    z-index: 1000
+
+    +mw(1000)
+        left: 30%
+
+    +mw(770)
+        left: 23%
+        top: 130px
+
+    +mw(550)
+        left: 18%
+
+    +mw(450)
+        left: 5%
+    
+
+    &__wrap
+        
+
+    &__img 
+        cursor: pointer
+
+    &__text
+        top: 20px
+        right: 20px
+        position: absolute
+        font-size: 14px
+        line-height: 140%
+        color: #5A5A5A
+        width: 266px
+        background: #FFFFFF
+        border-radius: 10px
+        padding: 30px 20px
+        opacity: 0
+        visibility: hidden
+
+        +mw(1000)
+            right: auto
+            left: 20px
+
+        +mw(770)
+            width: 200px
+
+.pm-text--showed
+    opacity: 1
+    visibility: visible
+
+
+.pm__wrapper
+    padding: 20px
+    background: #fff
+    border-radius: 30px
+
+.pm-sticky
+    position: sticky !important
+    // top: 0

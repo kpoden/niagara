@@ -1,187 +1,113 @@
-<div class="section first-section">
- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
- Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
- Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
- Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
- Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</div>
-<div class="section second-section">
-  <!-- content for second section goes here -->
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
-  Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
-  Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
-  Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
-  Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</div>
-<div class="section third-section">
-  <!-- content for third section goes here -->
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat doloremque sequi ab inventore eos voluptatibus cupiditate quas architecto minus ipsum quos nisi est deleniti quod ipsa, hic alias tempore debitis!
-  Dolor eos molestiae neque rem facilis? Velit nemo nobis consequuntur nihil sunt repudiandae eos ea, illo ratione adipisci! Consequuntur nihil necessitatibus perferendis, nemo hic ullam? Cupiditate non incidunt quis deleniti.
-  Soluta facere dolor expedita labore nihil itaque quidem officiis ad a, sed perspiciatis cupiditate enim perferendis dignissimos, nulla quas nisi veniam. Reiciendis expedita sint dolor unde maiores, nemo doloremque rerum?
-  Eius ab ipsam minima alias esse dolorem! Rem odit perspiciatis, voluptates sequi molestiae quasi alias nihil molestias praesentium in, inventore veniam dolorem laborum ducimus quisquam animi! Labore eos nihil quo!
-  Expedita amet nam totam veritatis molestiae voluptatum, tenetur aperiam, voluptatibus quisquam ipsum ratione ad, quod sunt dolorem quibusdam! Quisquam neque consectetur unde molestiae, nam ad sapiente dignissimos aspernatur! Cumque, culpa.
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
-<style>
-  .section {
-  height: 100vh;
-  width: 100%;
-}
+  
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&subset=cyrillic" rel="stylesheet">
 
-.first-section {
-  background-color: #ccc;
-}
+  <title>Document</title>
+</head>
+<body>
+  <button class="print" id="printBtn">Click</button>
 
-.second-section {
-  background-color: #aaa;
-  position: absolute;
-  top: 100vh;
-  left: 0;
-}
 
-.third-section {
-  background-color: #888;
-  position: absolute;
-  top: 200vh;
-  left: 0;
-}
 
-</style>
 <script>
-  window.addEventListener('scroll', function() {
-  var secondSection = document.querySelector('.second-section');
-  var thirdSection = document.querySelector('.third-section');
-  var distanceFromTop = secondSection.getBoundingClientRect().top;
 
-  if (distanceFromTop < window.innerHeight) {
-    secondSection.style.transform = 'translateY(' + (window.innerHeight - distanceFromTop) + 'px)';
-    thirdSection.style.transform = 'translateY(' + (window.innerHeight * 2 - distanceFromTop) + 'px)';
-  } else {
-    secondSection.style.transform = '';
-    thirdSection.style.transform = '';
-  }
+window.jsPDF = window.jspdf.jsPDF;
+
+
+const tableData = [  
+  ['Крепление', 'Скрытое'],
+  ['Вариант профиля', 'Bronze'],
+  ['Количество вставок', '2'],
+  ['Количество дверей', '3']
+];
+
+title = 'Расчет дверей'
+const canvas = document.getElementById('printBtn');
+canvas.addEventListener('click', ()=>{
+  printTableToCanvas(tableData, title)
 });
 
-function tracksMove(moveHeight) {
-    
-    
-    
-    moveHeight = moveHeight || 50;
-    
-    
-    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
-    const decor_texts = $('.decor_text, .decor_num, .decor_length');
-    
-    const montage = document.querySelector('.montage_length');
-    
-    if (montage.style.display === 'none') {
-        
-        if(!montage.classList.contains('moved')){
-             decor_texts.each(function() {
-              let currentTop = $(this).position().top;
-              $(this).css('top', currentTop - 50);
-              montage.classList.add('moved');
-        })
-      }
-        
-         
-      
-    
-    } else {
-      decor_texts.each(function() {
-      let currentTop = $(this).position().top;
-      $(this).css('top', currentTop + 50);
-    });
-    }
-    
-    track_texts.each(function() {
-        
-      let currentTop = $(this).position().top;
-      $(this).css('top', currentTop - moveHeight + movedTracks);
-    });
-    
-    movedTracks = moveHeight;
+
+function printTableToCanvas(tableData, title) {
+  // Create a new canvas element
+  const canvas = document.createElement('canvas');
+  canvas.width = 600; // Set the width of the canvas
+  canvas.height = 600; // Set the height of the canvas
+  // Get the 2D context of the canvas
+  const ctx = canvas.getContext('2d');
+  // Define the columns and rows of the table
+  const columns = ['Свойство', 'Значение'];
+  const rows = tableData;
+  // Set the width of the table columns
+  const columnWidths = [400, 400];
+  // Calculate the total width of the table
+  const tableWidth = columnWidths.reduce((total, width) => total + width, 0);
+  // Calculate the x-coordinate of the left edge of the table
+  const tableX = (canvas.width - tableWidth) / 2;
+  // Set the font properties
+  ctx.font = 'bold 16px Arial';
+  ctx.textAlign = 'center';
+  // Draw the title above the table
+  ctx.fillText(title, canvas.width / 2, 50);
+  // Set the font properties for the table cells
+  ctx.font = 'normal 12px Arial';
+  ctx.textAlign = 'center';
+  // Define the color gradient for the table rows
+  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  gradient.addColorStop(0, '#ffffff');
+  gradient.addColorStop(1, '#f1f1f1');
+  // Set the fill style for the table rows
+  ctx.fillStyle = gradient;
+  // Draw the table headers
+  ctx.fillRect(tableX, 70, tableWidth, 20);
+  ctx.fillStyle = '#000000';
+  ctx.fillText(columns[0], tableX + columnWidths[0] / 2, 85);
+  ctx.fillText(columns[1], tableX + columnWidths[0] + columnWidths[1] / 2, 85);
+  // Draw the table rows
+  let y = 100;
+  for (let i = 0; i < rows.length; i++) {
+  // Set the fill style for the current row
+  ctx.fillStyle = i % 2 === 0 ? '#ffffff' : '#f7f7f7';
+  ctx.fillRect(tableX, y, tableWidth, 20);
+  // Draw the table cells
+  ctx.fillStyle = '#000000';
+  ctx.textAlign = 'left'; // Set the text alignment to left
+  ctx.fillText(rows[i][0], tableX + columnWidths[0] / 2, y + 15);
+  ctx.fillText(rows[i][1], tableX + columnWidths[0] + 10, y + 15); // Adjust the x-coordinate to align left
+  ctx.textAlign = 'center'; // Set the text alignment back to center
+  // Increment the y-coordinate for the next row
+  y += 20;
 }
-
-let movedTracks = 0;
-let movedDecs = 0;
-
-function decorMove(decMovePx) {
-    const decor_texts = $('.decor_text, .decor_num, .decor_length');
-    const montage = document.querySelector('.montage_length');
-    
-
-        if(!montage.classList.contains('moved')){
-             decor_texts.each(function() {
-              $(this).addClass('dec_marg');
-        })
-        
-      } 
-}
-
-function tracksMove(moveHeight) {
-    
-    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
-    if(moveHeight == 1) {
-      track_texts.each(function() {
-      $(this).addClass('tracks_marg1');
-    });
-    } else if(moveHeight == 2) {
-        track_texts.each(function() {
-        $(this).addClass('tracks_marg2');
-    })
-  }
-    
-
-    
-    movedTracks = moveHeight;
-    console.log('Moved ' + moveHeight)
+  // Convert the canvas to an image
+  const imgData = canvas.toDataURL('image/png');
+  // Create a new image element
+  const img = document.createElement('img');
+  img.src = imgData;
+  // Create a new window to display the image and print it
+  const win = window.open();
+  win.document.body.appendChild(img);
+  win.print();
 }
 
 
-function tracksMove(moveHeight) {
-    
-    const track_texts = $('.montage_text, .montage_num, .montage_length, .decor_text, .decor_num, .decor_length, .track, .track_length, .track_height, .track_text');
-    if(moveHeight == 1) {
-      track_texts.each(function() {
-      $(this).removeClass('track_marg1');
-      $(this).removeClass('track_marg2');
-      $(this).removeClass('track_marg3');
-      $(this).removeClass('track_marg0');
-      $(this).addClass('track_marg1');
-      console.log('track_marg1');
-    });
-    } else if(moveHeight == 2) {
-        track_texts.each(function() {
-        $(this).removeClass('track_marg1');
-        $(this).removeClass('track_marg2');
-        $(this).removeClass('track_marg3');
-        $(this).removeClass('track_marg0');
-        $(this).addClass('track_marg2');
-        console.log('track_marg2');
-    })
-    } else if(moveHeight == 3) {
-        $(this).removeClass('track_marg1');
-        $(this).removeClass('track_marg2');
-        $(this).removeClass('track_marg3');
-        $(this).removeClass('track_marg0');
-        $(this).addClass('track_marg3');
-        console.log('track_marg3');
-    } else if(moveHeight == 0) {
-        $(this).removeClass('track_marg1');
-        $(this).removeClass('track_marg2');
-        $(this).removeClass('track_marg3');
-        $(this).removeClass('track_marg0');
-        console.log('track_marg0');
-    }
-    
 
-    
-    movedTracks = moveHeight;
-    console.log('Moved ' + moveHeight)
-}
+   
+
+
 </script>
+</body>
+</html>
+
+
+
+
+
 

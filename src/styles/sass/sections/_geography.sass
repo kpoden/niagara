@@ -40,6 +40,8 @@
         color: var(--c-grey)
         width: 50%
         padding-bottom: 15px
+        position: relative
+        cursor: pointer
 
         &::before
             content: "\2022"
@@ -48,6 +50,30 @@
             display: inline-block
             width: 1em
             margin-left: -1em
+
+        span
+            position: relative
+
+            &:after
+                background: none repeat scroll 0 0 transparent;
+                bottom: -2px;
+                content: "";
+                display: block;
+                height: 3px;
+                left: 50%;
+                position: absolute;
+                background: var(--c-orange)
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0%;
+
+            &:hover:after
+                width: 100% !important
+                left: 0 !important
+                
+        .underline:after 
+            width: 100% !important
+            left: 0 !important
+            
 
         +mw(800)
             font-size: 16px
@@ -98,6 +124,11 @@
         
     path
         transition: .2s
+        cursor: pointer
         &:hover
-            stroke-width: 2px !important
+            stroke-width: 3px !important
             stroke: #3c91ff !important
+
+.countryStroke
+    stroke-width: 3px !important
+    stroke: #3c91ff !important

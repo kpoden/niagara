@@ -1,0 +1,136 @@
+
+.right-aligned
+    margin-left: auto !important
+    padding-right: 100px !important
+    padding-top: 75px !important
+    padding-left: 140px !important
+
+.bottom-aligned
+    padding: 30% 0 80px 80px
+
+.dark-text
+    color: #5A5A5A !important
+
+.bigger-text
+    font-size: 32px
+    line-height: 39px
+
+.smaller-text
+    font-size: 16px
+    line-height: 150%;
+
+.neo-title
+    font-family: 'NeoSansW1G'
+    font-weight: 400
+    font-size: 64px
+    line-height: 77px
+    padding-bottom: 40px
+    
+.wider
+    max-width: 660px !important
+    
+    
+.zur
+
+    &-top
+        padding-top: 30%
+        font-weight: 700
+        font-size: 39px
+        line-height: 48px
+        padding-bottom: 50px
+
+    &-bottom
+        display: flex
+        align-items: flex-end
+
+    &-num
+        font-weight: 700
+        font-size: 96px
+        line-height: 80px
+
+    &-small
+        font-weight: 700
+        font-size: 36px
+        line-height: 44px
+
+    &-right
+        font-weight: 700
+        font-size: 36px
+        line-height: 44px
+        padding-left: 20px
+            
+    
+    
+    
+    
+    
+.prod-template
+    background: #fff
+    z-index: 1000
+    position: relative
+    
+    
+.template-1
+    display: flex
+    height: 660px
+    padding: 40px
+    align-items: center
+    background: #fff
+
+    +mw(1100)
+        flex-direction: column
+        margin: 0 auto
+        height: auto
+        
+.prod-template__part
+    position: relative
+
+
+.part
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    max-width: 409px
+    height: 100%
+
+    +mw(1100)
+        height: 500px
+
+    
+
+    
+    &__bg
+        position: absolute
+        width: 100%
+        height: 100%
+        object-fit: cover
+        z-index: 0
+
+
+    &__top
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+        z-index: 0
+        max-width: 80%
+
+    &__content
+        position: relative
+        margin-top: auto
+        z-index: 1
+        padding: 0 33px 75px
+        color: #fff
+
+    &__title
+        font-family: 'Montserrat'
+        font-style: normal
+        font-weight: 700
+        font-size: 24px
+        line-height: 130%
+        padding-bottom: 20px
+
+    &__text
+        font-weight: 400
+        font-size: 16px
+        line-height: 140%

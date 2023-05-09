@@ -80,7 +80,7 @@
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .pecs {
@@ -108,3 +108,103 @@
 .bolder {
     font-weight: bolder;
 }
+
+.unvisOrder {
+    opacity: 0 !important;
+    z-index: -5 !important;
+    left: calc(100% + 70vw) !important;
+}
+
+.scroll-up {
+    position: fixed;
+    right: 100px;
+    cursor: pointer;
+    bottom: -100px;
+    transition: .2s;
+    opacity: 0;
+
+    svg {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+
+.scroll-up__appear {
+    opacity: 1;
+    bottom: 50px;
+    z-index: 1000;
+}
+
+@media (max-width: 1000px) {
+    .scroll-up {
+        right: 50px;
+
+    }
+
+    .scroll-up__appear {
+        bottom: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .scroll-up {
+        right: 20px;
+
+    }
+
+    .scroll-up__appear {
+        bottom: 20px;
+    }
+}
+
+.fixed_main {
+    position: fixed !important;
+    transform: translateX(-50%) !important;
+    left: 50%;
+    width: 100% !important;
+}
+
+.filler {
+    height: 500px;
+}
+
+.animMain {
+    animation-name: zoomIn;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.5s;
+    animation-direction: alternate;
+    // animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.3);
+    }
+    60% {
+        transform: scale(0.5);
+    }
+    94% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    95% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
+.inv {
+    opacity: 0;
+}
+

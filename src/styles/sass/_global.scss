@@ -9,6 +9,14 @@
 body {
   font-family: 'Montserrat', Arial, sans-serif;
   background: var(--bg-grey-light);
+  overflow-x: hidden;
+}
+
+.header, .mission, .history, .work, .news {
+  position: -webkit-sticky !important; 
+  position: sticky !important; 
+  top: 0; 
+  z-index: 0;
 }
 
 h1,
@@ -24,7 +32,7 @@ h6 {
   max-width: 1920px;
   margin: 0 auto;
   color: var(--c-font-regular);
-  min-width: 320px;
+  min-width: 360px;
   padding: 20px;
   position: relative;
   scroll-snap-type: y mandatory;
