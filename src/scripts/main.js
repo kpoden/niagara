@@ -16,6 +16,35 @@ $(document).ready(function(){
 });
 
 
+
+
+function preloader() {
+  const preloaderWrap = document.getElementById('preloader');
+
+  
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+    const mediaFiles = document.querySelectorAll('.header-top__bg');
+    let i = 0;
+    console.log(i);
+    mediaFiles.forEach((file, index) => {
+      i++;
+      file.onload = () => {
+        if (i == (mediaFiles.length)) {
+          preloaderWrap.classList.add('done');
+          setTimeout(()=>{preloaderWrap.classList.add('done')}, 1000);
+        }
+      }
+    });
+
+
+
+    setTimeout(()=>{preloaderWrap.classList.add('done')}, 4000);
+    
+  });
+}
+preloader()
+
 function newsListConstruct() {
   const newsData = document.getElementById('news');
   const newsWrap = document.querySelector('.news__list');
@@ -37,6 +66,7 @@ function newsListConstruct() {
     newsImgWrap.appendChild(newsImg);
     newsItemWrap.appendChild(newsImgWrap);
 
+
     const newsText = document.createElement('p');
     newsText.classList.add('news-item__desc');
     newsText.innerText = news.title;
@@ -55,10 +85,14 @@ class News {
     this.newsData = document.getElementById(news);
     this.modal = document.getElementById(modal);
     this.imagesWrap = this.modal.querySelector('.modal__images');
+    this.imagesWrap.classList.add('hidden');
     this.imagesWrap.innerHTML = "";
     this.textWrap = this.modal.querySelector('.modal__text');
     this.textWrap.innerHTML = "";
     this.currentNews = id;
+    this.mainWrap = this.modal.querySelector('.modal__main');
+    this.mainWrap.innerHTML = "";
+
     this.init();
   }
 
@@ -75,17 +109,50 @@ class News {
   }
 
   constructNewsWindow() {
+    this.constructMainImage();
     this.constructImages();
     this.constructText();
   }
 
+  constructMainImage() {
+    if(this.news.video) {
+      const video = document.createElement('video');
+      video.classList.add('modal__video');
+      video.setAttribute('controls', '');
+      const source = document.createElement('source');
+      source.src = this.news.video;
+      source.setAttribute('type', 'video/mp4');
+      video.appendChild(source);
+      this.mainWrap.appendChild(video);
+    } else {
+      const mainImage = document.createElement('img');
+      mainImage.classList.add('modal__main-image');
+      mainImage.src = this.news.cover;
+      this.mainWrap.appendChild(mainImage);
+    }
+  }
+
   constructImages() {
+    if(this.news.images) {
     this.news.images.forEach(image => {
+      const newsImageWrap = document.createElement('a');
+      newsImageWrap.classList.add('modal__image');
+      newsImageWrap.dataset.fslightbox = "gallery";
+      newsImageWrap.setAttribute('href', image);
+
       const newsImage = document.createElement('img');
-      newsImage.classList.add('modal__image');
       newsImage.setAttribute('src', image);
-      this.imagesWrap.appendChild(newsImage);
+      newsImageWrap.appendChild(newsImage);
+      
+      this.imagesWrap.appendChild(newsImageWrap);
+      this.imagesWrap.classList.remove('hidden');
+      
     })
+
+    refreshFsLightbox();
+  }
+
+    
   }
 
   constructText() {
@@ -135,6 +202,12 @@ function preInitImages() {
         const imgSrc = flavor.image;
         img.src = imgSrc;
         imgWrapper.appendChild(img);
+
+        const imgFlav = document.createElement("img");
+        const imgFlavSrc = flavor.icon;
+        imgFlav.src = imgFlavSrc;
+        imgWrapper.appendChild(imgFlav);
+
         
 
       });
@@ -231,6 +304,8 @@ class Products {
     this.switchWrap = document.querySelector('.switch-wrap');
     this.switchWrap.innerHTML = "";
     this.flavoursChooseDiv = document.querySelector('.flavours__choose');
+    this.flavoursChooseDiv.classList.remove('shortFlavList-4');
+    this.flavoursChooseDiv.classList.remove('shortFlavList-2');
     this.thirdWindow = document.querySelector('.prod-tiger');
     this.currentVol = '0';
     this.currentProd = id;
@@ -249,11 +324,15 @@ class Products {
     this.pmDecorBgWrap.classList.add('hidden');
     this.pmDecorBg = document.querySelector('.pm-header__decorbg img');
     this.pmDecorBg.src = '';
+    this.pmPlashkaWrap = document.querySelector('.pm-header__plashka');
+    this.pmPlashkaWrap.classList.add('hidden');
     this.pmPlashka = document.querySelector('.pm-header__plashka img');
     this.pmPlashka.src = '';
     this.templateWrap = document.querySelector('.prod-template');
     this.templateWrap.innerHTML = "";
     this.templateWrap.classList.add('hidden');
+    this.socWindow = document.querySelector('.prod-soc');
+    this.socWindow.classList.add('hidden');
 
     this.bg.classList.remove('pm-sticky');
     this.pmAdvSection.classList.remove('pm-sticky');
@@ -264,6 +343,171 @@ class Products {
   }
 
 
+  createProductLine() {
+
+
+    const imgLineWrapper = document.querySelector('.pm-adv__line');
+    imgLineWrapper.innerHTML = "";
+    const imgLineInner = document.createElement('div');
+    imgLineInner.classList.add('pm-adv__inner');
+    imgLineWrapper.appendChild(imgLineInner);
+    imgLineInner.innerHTML = "";
+    const imgLineArr = [];
+    imgLineWrapper.dataset.length = "";
+    this.product.volumes.forEach(volume => {
+
+      volume.flavors.forEach(flavor => {
+        flavor.size = volume.size;
+        imgLineArr.push(flavor); 
+      });
+    });
+
+
+    imgLineArr.sort(function(a, b) {
+      // Convert both names to lowercase for case-insensitive sorting
+      var nameA = a.name.toLowerCase();
+      var nameB = b.name.toLowerCase();
+      
+      // Compare the names and return the comparison result
+      if (nameA < nameB) {
+        return -1; // a should be placed before b
+      } else if (nameA > nameB) {
+        return 1; // a should be placed after b
+      } else {
+        return 0; // names are equal
+      }
+    });
+
+    const dividedArrays = {};
+
+    for (const product of imgLineArr) {
+      const name = product.name;
+      
+      // Check if the name is already a key in the dividedArrays object
+      if (dividedArrays.hasOwnProperty(name)) {
+        // If the key already exists, push the product into the corresponding array
+        dividedArrays[name].push(product);
+      } else {
+        // If the key doesn't exist, create a new array with the product
+        dividedArrays[name] = [product];
+      }
+    }
+
+    // Convert the divided arrays object into an array of arrays
+    const result = Object.values(dividedArrays);
+
+    const preSortArr = [];
+
+
+    result.forEach((arr) =>{
+      const flavGroup = document.createElement('div');
+      flavGroup.classList.add('flavgroup');
+      arr.forEach((flavor) =>{
+        const img = document.createElement("img");
+        const imgSrc = flavor.image;
+        img.src = imgSrc;
+        img.setAttribute("alt", flavor.title);
+        img.setAttribute("title", flavor.title);
+        const size = flavor.size;
+        const floatValueStr = size.replace(/[^0-9,.]/g, "").replace(",", ".");
+        const flavSize = parseFloat(floatValueStr);
+
+
+        if(flavSize < 0.4) {
+          img.classList.add('small');	
+        } else if(flavSize < 0.7) {
+          img.classList.add('medium');	
+        } else if(flavSize < 1.6) {
+          img.classList.add('big');	
+        } else if(flavSize >= 1.6) {
+          img.classList.add('huge');	
+        }
+
+        flavGroup.classList.add(flavor.name);
+
+        flavGroup.appendChild(img);
+      });
+      preSortArr.push(flavGroup);
+      
+    });
+    // console.log(preSortArr);
+    // console.log(this.product.order);
+      if(this.product.order) {
+      const order = this.product.order;
+
+      const sortedDivs = [];
+      for (var i = 0; i < order.length; i++) {
+        for (var j = 0; j < preSortArr.length; j++) {
+          if (preSortArr[j].classList.contains(order[i])) {
+            sortedDivs.push(preSortArr[j]);
+            break;
+          }
+        }
+      }
+
+      sortedDivs.forEach(div => imgLineInner.appendChild(div));
+    } else {
+      preSortArr.reverse();
+      preSortArr.forEach(div => imgLineInner.appendChild(div));
+    }
+
+    imgLineWrapper.dataset.length = preSortArr.length;
+    imgLineWrapper.dataset.brand = this.product.name;
+    imgLineInner.style.width = imgLineWrapper.dataset.length * 10 + "%";
+
+  }
+
+
+  createSoc() {
+
+    const socText = document.querySelector('.prod-soc__text');
+    const socLinks = document.querySelectorAll('.prod-links__link');
+    socLinks.forEach(socLink => {socLink.classList.add('hidden')});
+    const socImages = document.querySelector('.prod-soc__images');
+    socImages.innerHTML = "";
+    if(this.product.soc) {
+
+      this.socWindow.classList.remove('hidden');
+
+      // icons init
+      if(this.product.soc[0].links) {
+        this.product.soc[0].links.forEach(link => {
+          socLinks.forEach(image => {
+            if(link.site == image.dataset.soc) {
+              image.classList.remove('hidden');
+              image.setAttribute('href', link.link);
+            }
+          })
+        });
+      }
+
+      if(this.product.soc[0].text) {
+        socText.innerHTML = this.product.soc[0].text;
+      }
+
+      if(this.product.soc[0].images) {
+        this.product.soc[0].images.forEach(image=>{
+          const socImage = document.createElement('img');
+          socImage.src = image;
+          socImages.appendChild(socImage);
+        })
+      }
+
+    }
+  }
+
+
+
+  hidePanels() {
+    var id = '.pm-adv,.prod-info,.prod-template';
+    var elements = document.querySelectorAll(id);
+
+    elements.forEach(el=>{
+        el.classList.add('inv');
+
+        setTimeout(()=>{el.classList.remove('inv')}, 500);
+    })
+  }
  
 
   getCurrentVol() {
@@ -287,13 +531,11 @@ class Products {
           window.removeEventListener('scroll', scrollListenerHalfAdv);
           window.removeEventListener('scroll', scrollListenerHalfSecondWindow);
           window.removeEventListener('scroll', scrollListenerHalfTemplate);
-          window.removeEventListener('scroll', scrollListenerHalfTiger);
 
           setTimeout(function() {
             window.addEventListener('scroll', scrollListenerHalfAdv);
             window.addEventListener('scroll', scrollListenerHalfSecondWindow);
             window.addEventListener('scroll', scrollListenerHalfTemplate);
-            window.addEventListener('scroll', scrollListenerHalfTiger);
           }, 500)
 
           
@@ -322,7 +564,7 @@ class Products {
         function scrollListenerHalfSecondWindow() {
           const pmInfo = document.querySelector('.prod-info');
           const rect = document.querySelector('.prod-info').getBoundingClientRect();
-          if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 3) {
+          if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 4) {
             const topPos = document.documentElement.scrollTop + window.innerHeight/1;
             if(!pmInfo.classList.contains('scrolled')) {
     
@@ -342,7 +584,7 @@ class Products {
         function scrollListenerHalfTemplate() {
           const pmTemplate = document.querySelector('.prod-template');
           const rect = document.querySelector('.prod-template').getBoundingClientRect();
-          if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 2) {
+          if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 4) {
             const topPos = document.documentElement.scrollTop + window.innerHeight/1;
             if(!pmTemplate.classList.contains('scrolled')) {
     
@@ -359,30 +601,30 @@ class Products {
           }
         }
 
-        function scrollListenerHalfTiger() {
-          const pmTiger = document.querySelector('.prod-tiger');
-          const rect = document.querySelector('.prod-tiger').getBoundingClientRect();
-          if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 2.2) {
-            const topPos = document.documentElement.scrollTop + window.innerHeight/1;
-            if(!pmTiger.classList.contains('scrolled')) {
+        // function scrollListenerHalfTiger() {
+        //   const pmTiger = document.querySelector('.prod-tiger');
+        //   const rect = document.querySelector('.prod-tiger').getBoundingClientRect();
+        //   if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 2.2) {
+        //     const topPos = document.documentElement.scrollTop + window.innerHeight/1;
+        //     if(!pmTiger.classList.contains('scrolled')) {
     
-                gsap.to(window, {
-                  duration: 1,
-                  scrollTo: topPos
-            })
+        //         gsap.to(window, {
+        //           duration: 1,
+        //           scrollTo: topPos
+        //     })
               
           
-            pmTiger.classList.add('scrolled');
-            }
-          } else {
-            pmTiger.classList.remove('scrolled');
-          }
-        }
+        //     pmTiger.classList.add('scrolled');
+        //     }
+        //   } else {
+        //     pmTiger.classList.remove('scrolled');
+        //   }
+        // }
       }
 
 
   scrollFix() {
-    var id = '.product-modal__header,.pm-adv,.prod-info,.prod-template';
+    var id = '.product-modal__header,.pm-adv,.prod-info,.prod-template,.prod-soc';
     var elements = document.querySelectorAll(id);
     var windowHeight = window.innerHeight;
     const visElements = [];
@@ -393,18 +635,34 @@ class Products {
       }
     })
     const lastVisEl = visElements[visElements.length - 1];
-    const lastVisElHeight = lastVisEl.getBoundingClientRect().height;
+    setTimeout(() => {
+      const lastVisElHeight = lastVisEl.getBoundingClientRect().height
+    
+    
+    
 
     const paddingBottomModal = windowHeight - lastVisElHeight;
+    console.log(lastVisEl);
+    console.log(lastVisElHeight);
 
     if(paddingBottomModal > 0) {
       this.modal.style.paddingBottom = paddingBottomModal + 'px';
     }
+  }, 700)
 
     window.addEventListener('resize', function() {
       const prodModalResized = document.getElementById('modal-prod');
       var windowHeight = window.innerHeight;
-      const paddingBottomModal = windowHeight - lastVisElHeight;
+      const visElements = [];
+
+    elements.forEach(el=>{
+      if(!el.classList.contains('hidden')) {
+        visElements.push(el);
+      }
+    })
+    const lastVisEl = visElements[visElements.length - 1];
+    const lastVisElHeight = lastVisEl.getBoundingClientRect().height
+    const paddingBottomModal = windowHeight - lastVisElHeight;
 
       if(paddingBottomModal > 0) {
         prodModalResized.style.paddingBottom = paddingBottomModal + 'px';
@@ -445,13 +703,27 @@ class Products {
   }
 
   initSticky() {
-    setTimeout(()=>{
-      this.bg.classList.add('pm-sticky');
-      this.pmAdvSection.classList.add('pm-sticky');
-      this.secondWindow.classList.add('pm-sticky');
-      this.thirdWindow.classList.add('pm-sticky');
-      this.templateWrap.classList.add('pm-sticky');
-    }, 50)
+        
+      window.addEventListener('scroll', ()=>{
+        if(this.modal.classList.contains('opened-modal')) {
+        setTimeout(()=>{
+        this.bg.classList.add('pm-sticky');
+        this.pmAdvSection.classList.add('pm-sticky');
+        this.secondWindow.classList.add('pm-sticky');
+        this.thirdWindow.classList.add('pm-sticky');
+        this.templateWrap.classList.add('pm-sticky');
+        window.dispatchEvent(new Event('resize'));
+        }, 100)
+        
+      }});
+    
+    // setTimeout(()=>{
+    //   this.bg.classList.add('pm-sticky');
+    //   this.pmAdvSection.classList.add('pm-sticky');
+    //   this.secondWindow.classList.add('pm-sticky');
+    //   this.thirdWindow.classList.add('pm-sticky');
+    //   this.templateWrap.classList.add('pm-sticky');
+    // }, 50)
       
     
   }
@@ -557,9 +829,10 @@ class Products {
       this.pmDecorBgWrap.classList.remove('hidden');
       this.pmDecorBg.src = this.product.decorbg;
     }
-    // this.productImage.src = this.product.volumes[this.currentVol].flavors[0].image;
-    this.productImageWrap.classList.add('animMain');
-    // this.bg.style.background = this.product.volumes[this.currentVol].flavors[0].bgcolor;
+    
+    setTimeout(function() {
+      this.productImageWrap.classList.add('animMain');
+    }.bind(this), 10);
     this.subtitleText.innerHTML = this.product.subtitle;
     this.logoImage.src = this.product.logo;
     this.showNote();
@@ -581,6 +854,13 @@ class Products {
     });
 
     const flavQuant = this.flavorList.length;
+    if(flavQuant < 5) {
+      this.flavoursChooseDiv.classList.add('shortFlavList-4');
+    } else if(flavQuant < 3) {
+      this.flavoursChooseDiv.classList.add('shortFlavList-2');
+    }
+
+
     if(flavQuant == 1) {
       flavorQuantSpan.innerHTML = flavQuant + ' вкус:';
     } else 
@@ -687,10 +967,13 @@ class Products {
       if(currentVol == "2") {
         this.currentVol = '1';
         this.chooseVolSwitch.classList.add('switched');
+        this.chooseVolIcon.setAttribute('data-curr-vol','1');
       } else if(currentVol == "1") {
         this.currentVol = '0';
+        this.chooseVolIcon.setAttribute('data-curr-vol','0');
       } else if(currentVol == "3") {
         this.currentVol = '2';
+        this.chooseVolIcon.setAttribute('data-curr-vol','2');
         this.chooseVolSwitch.classList.add('switched2');
         
       }
@@ -717,7 +1000,13 @@ class Products {
         }
 
         if(flavor.plashka) {
+          this.pmPlashkaWrap.classList.remove('hidden');
           this.pmPlashka.src = flavor.plashka;
+        }
+        this.pmStarBlock.classList.add('hidden');
+        if(flavor.note) {
+          this.pmStarBlock.classList.remove('hidden');
+          this.pmTextWrap.textContent = flavor.note;
         }
         this.bg.style.background = flavor.bgcolor;
         this.productImage.src = flavor.image;
@@ -741,15 +1030,14 @@ class Products {
       console.log(e.target);
 
       if(this.chooseVolIcon.classList.contains('vol-quant-2')) {
+        this.productImageWrap.classList.remove('animMain');
         if(this.chooseVolSwitch.classList.contains('switched')) {
-          console.log(1);
           this.chooseVolIcon.setAttribute('data-curr-vol','0');
           this.chooseVolSwitch.classList.remove('switched');
           this.currentVol = '0';
           
         } else {
           this.chooseVolIcon.setAttribute('data-curr-vol','1');
-          console.log(2);
           this.chooseVolSwitch.classList.add('switched');
           this.currentVol = '1';
         }
@@ -766,6 +1054,8 @@ class Products {
 
     volumesSpans.forEach((span)=>{
       span.addEventListener('click',(e)=>{
+        this.productImageWrap.classList.remove('animMain');
+        console.log('removed');
         e = e.target.closest('.vol');
         if(e.classList.contains('vol-1')){
           this.currentVol = '0';
@@ -773,6 +1063,7 @@ class Products {
           this.chooseVolSwitch.classList.remove('switched2');
           this.chooseVolIcon.setAttribute('data-curr-vol','0');
         } else if(e.classList.contains('vol-2')) {
+          this.chooseVolIcon.setAttribute('data-curr-vol','1');
           this.chooseVolSwitch.classList.remove('switched2');
           this.chooseVolSwitch.classList.add('switched');
           this.currentVol = '1';
@@ -818,6 +1109,8 @@ class Products {
           item.classList.remove('flavours--active');
         });
 
+
+
         this.activeFlavour = e.target.closest('.flavours__item').getAttribute('data-name');
         this.activeFlavorIcon =  e.target.closest('.flavours__item');
         this.activeFlavorIcon.classList.add('flavours--active');
@@ -834,15 +1127,18 @@ class Products {
   changeWindow(id) {
     this.getProductInfo(id);
     this.posWindow();
+    // this.hidePanels();
     this.getCurrentVol();
     this.initMainWindow();
     this.createAdvantages();
     this.createSecondWindow();
     this.createTemplateWindow();
+    this.createSoc();
     this.getVolQuantity();
     this.createSwitch();
     this.getVolume();
     // this.addListenerVolume();
+    this.createProductLine();
     this.initFlavorsList();
     this.scrollFix();
     // this.onePunchProd();
@@ -871,31 +1167,27 @@ productList.forEach((item) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function productTextAppear() {
   const pmStar = document.querySelector(".pm-star__wrap");
   const pmText = document.querySelector(".pm-star__text");
 
   pmStar.addEventListener("click", function(e) {
-    pmText.classList.toggle("pm-text--showed");
+    if(e.target.classList.contains('pm-text--showed')) {
+      pmText.classList.remove("pm-text--showed");
+    } else {
+      pmText.classList.add("pm-text--showed");
+    }
+    
 
   })
+
+  window.addEventListener("click", (e)=> {
+    if(!e.target.parentNode.classList.contains('pm-star__wrap')) {
+      pmText.classList.remove("pm-text--showed");
+    }
+    
+    
+})
 }
 
 productTextAppear()
@@ -906,8 +1198,6 @@ function scrollFix() {
 document.addEventListener("DOMContentLoaded", function(event) {
 
   var id = '.header,.mission,.history,.work,.news';
-  const newsBlock = document.querySelector('.news');
-  const newsSpoiler = document.querySelector('.news__spoiler');
 
   window.addEventListener('load', function() {
     var elements = document.querySelectorAll(id);
@@ -949,18 +1239,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
   });
 
-  newsSpoiler.addEventListener('click', function(event) {
-    var windowHeight = window.innerHeight;
-    var elementHeight = newsBlock.offsetHeight;
-    var topPosition = windowHeight - elementHeight;
+  // newsSpoiler.addEventListener('click', function(event) {
+  //   window.dispatchEvent(new Event('resize'));
+  //   var windowHeight = window.innerHeight;
+  //   console.log();
+  //   var elementHeight = newsBlock.offsetHeight;
+  //   var topPosition = windowHeight - elementHeight;
 
-    if (topPosition < 0) {
-      newsBlock.style.top = topPosition + 'px';
-    } else {
-      newsBlock.style.top = '0';
-    }
+  //   if (topPosition < 0) {
+  //     newsBlock.style.top = topPosition + 'px';
+  //   } else {
+  //     newsBlock.style.top = '0';
+  //   }
 
-  })
+  // })
 
 });
 
@@ -1004,6 +1296,7 @@ function isElementInViewport(el) {
       rect.top < (window.innerHeight || document.documentElement.clientHeight) /* or $(window).height() */;
 }
 
+let onePunchAllow = true;
 
 function onePunch() {
   const sectionMission = document.querySelector('.mission');
@@ -1022,21 +1315,63 @@ function onePunch() {
   sections_half.push(sectionNews);
   sections_half.push(sectionProduct);
   sections_half.push(sectionGeography);
-  sections_half.push(sectionHistory);
+  // sections_half.push(sectionHistory);
   // sections_half.push(sectionFooter);
+
+  const newsModal = document.getElementById('modal-news');
+
+  function addHistoryScroll() {
+    const navBar = document.querySelector('.n-menu');
+
+    let divider = 1.7;
+
+    
+    const rect = sectionHistory.getBoundingClientRect();
+      if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / divider) {
+        const topPos = document.documentElement.scrollTop + window.innerHeight/divider;
+        if(!sectionHistory.classList.contains('scrolled')) {
+
+          if(!navBar.classList.contains('nav-clicked') && !newsModal.classList.contains('opened-modal') && onePunchAllow) {
+            gsap.to(window, {
+              duration: 1,
+              scrollTo: topPos
+          })
+        }
+          
+      
+        sectionHistory.classList.add('scrolled');
+        }
+      } else {
+        sectionHistory.classList.remove('scrolled');
+      }
+  }
 
   function addScrollHalf(section) {
     const navBar = document.querySelector('.n-menu');
 
+    let divider;
+    let dur;
+
+    if(window.innerWidth > 750) {
+     divider = 1.1;
+     dur = 1;
+    } else {
+     divider = 1.8;
+     dur = 0.5;
+    }
+
+
+
     
     const rect = section.getBoundingClientRect();
-      if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 1.1) {
-        const topPos = document.documentElement.scrollTop + window.innerHeight/1.1;
+      if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / divider) {
+        const topPos = document.documentElement.scrollTop + window.innerHeight/divider;
         if(!section.classList.contains('scrolled')) {
 
-          if(!navBar.classList.contains('nav-clicked')) {
+          if(!navBar.classList.contains('nav-clicked') && !newsModal.classList.contains('opened-modal') && onePunchAllow) {
+            section.classList.add('half-scrolled');
             gsap.to(window, {
-              duration: 1,
+              duration: dur,
               scrollTo: topPos
           })
         }
@@ -1052,13 +1387,25 @@ function onePunch() {
   function addScroll(section) {
     const navBar = document.querySelector('.n-menu');
 
+
+    let divider;
+    let dur;
+
+    if(window.innerWidth > 750) {
+     divider = 1.1;
+     dur = 1;
+    } else {
+     divider = 1.8;
+     dur = 0.5;
+    }
+
         const rect = section.getBoundingClientRect();
-        if(isElementInViewport(section)) {
-          const topPos = document.documentElement.scrollTop + window.innerHeight;
+        if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / divider) {
+          const topPos = document.documentElement.scrollTop + window.innerHeight / divider;
           if(!section.classList.contains('scrolled')) {
-            if(!navBar.classList.contains('nav-clicked')) {
+            if(!navBar.classList.contains('nav-clicked') && !newsModal.classList.contains('opened-modal') && onePunchAllow) {
               gsap.to(window, {
-                duration: 1,
+                duration: dur,
                 scrollTo: topPos
             })
           }
@@ -1071,13 +1418,7 @@ function onePunch() {
       }
   }
 
-  // sections_half.forEach(function(section) {
-  //   window.addEventListener('scroll', addScrollHalf);
-  // });
-  
-  // sections.forEach(function(section) {
-  //   window.addEventListener('scroll', addScroll);
-  // });
+
 
 
   let scrollListenerHalf;
@@ -1097,69 +1438,11 @@ function onePunch() {
     window.addEventListener('scroll', scrollListener);
   });
 
-  // const switchBtn = document.querySelector('.n-lang');
+  
 
-  // switchBtn.addEventListener('click', () => {
-  //   console.log('removed');
+    window.addEventListener('scroll', addHistoryScroll);
 
-  //   sections.forEach(function(section) {
-  //     window.removeEventListener('scroll', scrollListener);
-  //   });
-
-  //   sections_half.forEach(function(section) {
-  //     window.removeEventListener('scroll', scrollListenerHalf);
-  //   });
-    
-    
-  // })
-
-
-  // sections_half.forEach(function(section) {
-  //   window.addEventListener('scroll', () => {
-  //     const rect = section.getBoundingClientRect();
-  //     if(rect.top < (window.innerHeight || document.documentElement.clientHeight) / 1.1) {
-  //       const topPos = document.documentElement.scrollTop + window.innerHeight/1.1;
-  //       if(!section.classList.contains('scrolled')) {
-  //         gsap.to(window, {
-  //           duration: 1,
-  //           scrollTo: topPos
-  //       })
-      
-  //         section.classList.add('scrolled');
-  //       }
-  //     } else {
-  //       section.classList.remove('scrolled');
-  //     }
-      
-
-  // })
-
-  // })
-
-  // sections.forEach(function(section) {
-  //   window.addEventListener('scroll', () => {
-  //     const rect = section.getBoundingClientRect();
-
-  //     if(isElementInViewport(section)) {
-
-  //       const topPos = document.documentElement.scrollTop + window.innerHeight;
-
-        
-  //       if(!section.classList.contains('scrolled')) {
-  //         gsap.to(window, {
-  //           duration: 1,
-  //           scrollTo: topPos
-  //       })
-      
-  //         section.classList.add('scrolled');
-  //       }
-    
-  //   } else {
-  //     section.classList.remove('scrolled');
-  //   }
-  // })
-
-  // })
+  
 
 
   }
@@ -1170,13 +1453,17 @@ onePunch()
 
 function scrollUpAppear() {
   window.addEventListener('scroll', function() {
+    const prodModal = document.querySelector('#modal-prod');
+    if(!prodModal.classList.contains('opened-modal')) {
     var element = document.getElementById('scroll-up');
     if (window.scrollY > 500) {
       element.classList.add('scroll-up__appear');
     } else {
       element.classList.remove('scroll-up__appear');
     }
+  }
   });
+  
 }
 
 scrollUpAppear();
@@ -1287,32 +1574,24 @@ function counters() {
        
   
     });
-
-//   const counters = document.querySelectorAll('.mission-adv__top-text');
-
-//   counters.forEach((counter)=> {
-//       counter.innerText = 0;
-//       let count = 0;
-
-//       function updateCount() {
-//         const target = parseFloat(counter.dataset.count);
-
-//         if(count < target) {
-//           count++;
-//           counter.innerText = count;
-//           const duration = 4000/target;
-//           setTimeout(updateCount, duration);
-//         } else {
-//           counter.innerText = target;
-//         }
-
-//     }
-
-//     updateCount();
-
-//   })
-
 }
+
+function pecsInit() {
+  let visitCount = parseInt(localStorage.getItem('visitCount')) || 0;
+  visitCount++;
+  localStorage.setItem('visitCount', visitCount);
+  let pecNum = visitCount % 8;
+
+  const pecWrap = document.querySelector('.header-top__bg');
+
+  const pecs = document.getElementById('pecs');
+  const pecsList = JSON.parse(pecs.innerHTML).pecs;
+
+  pecWrap.setAttribute('src', pecsList[pecNum]);
+  pecWrap.classList.remove('hidden');
+}
+
+pecsInit();
 
 
 
@@ -1333,17 +1612,19 @@ function pecsChange() {
 
 }
 
-pecsChange();
+// pecsChange();
 
 
 function videoAppear() {
   const videoBg = document.querySelector('.header-top__bg-vid');
   const pecs = document.querySelector('.pecs');
 
-  setTimeout(function() {
-    pecs.classList.add('pecs_disappear');
-    videoBg.play();
-  }, 4000)
+  document.addEventListener("DOMContentLoaded", function(event) {
+    setTimeout(function() {
+      pecs.classList.add('pecs_disappear');
+      videoBg.play();
+    }, 5000)
+  })
 
 
 }
@@ -1356,7 +1637,17 @@ function videoAppear() {
 function lang() {
   const switchLang = document.querySelector('.n-lang');
   switchLang.addEventListener('click', () => {
-    switchLang.classList.toggle('en');
+    console.log(11);
+    if(switchLang.classList.contains('en')) {
+      switchLang.classList.remove('en');
+      setTimeout(()=>{window.location.href = 'https://niagara-drinks.ru/';}, 1000)
+      
+    } else {
+      switchLang.classList.add('en');
+      setTimeout(()=>{window.location.href = 'https://en.niagara-drinks.ru/';}, 1000)
+    }
+    
+    
   })
 }
 
@@ -1461,7 +1752,22 @@ function newsSpoiler() {
       })
 
     }
+
+    window.dispatchEvent(new Event('resize'));
+    const newsBlock = document.querySelector('.news');
+    var windowHeight = window.innerHeight;
+    var elementHeight = newsBlock.offsetHeight;
+    var topPosition = windowHeight - elementHeight;
+
+    if (topPosition < 0) {
+      newsBlock.style.top = topPosition + 'px';
+    } else {
+      newsBlock.style.top = '0';
+    }
+
   })
+
+  
 }
     
 newsSpoiler();
@@ -1509,8 +1815,6 @@ document.getElementById("menu-contacts").addEventListener("click", () => {
         }
     })
 
-    // const el = document.querySelector('.footer');
-    // el.scrollIntoView({behavior: "smooth"});
 })
 
 document.getElementById("scroll-up").addEventListener("click", () => {
@@ -1626,10 +1930,11 @@ navLinkList.forEach((link) => {
 
 
     class Modal {
-      constructor(modalId, trigger, overlay) {
+      constructor(modalId, trigger, overlay, closeButton) {
         this.modalId = modalId;
         this.modal = document.getElementById(modalId);
-        this.closeButton = this.modal.querySelector('.modal__close');
+        this.closeButton = document.querySelector(closeButton);
+        // this.closeButtonNews = document.querySelector('.modal__close');
         this.modalTrigger = document.querySelectorAll(trigger);
         this.overlay = document.querySelector(overlay);
         this.isOpen = false;
@@ -1647,22 +1952,36 @@ navLinkList.forEach((link) => {
       }
     
       open() {
+        this.modal.style.display = 'block';
         this.modal.classList.add('opened-modal');
         this.overlay.classList.add('overlay--shown');
         this.isOpen = true;
         
-        this.modal.style.top = '50px';
-        this.scrollUp.classList.add('hidden');
+        this.modal.style.top = '20px';
+        this.scrollUp.classList.add('scroll-up__appear');
 
         
         if(this.modalId == 'modal-prod') {
           const topScrollProd = this.productSection.getBoundingClientRect().top;
+          this.closeButton.classList.add('close-vis');
           const topScroll = document.documentElement.scrollTop;
+          this.topScroll = document.documentElement.scrollTop;
 
           this.mainSection.classList.add('fixed_main');
           this.mainSection.style.top = '-'+topScroll +'px';
+          this.modal.style.top = '20px';
+            gsap.to(window, {
+              duration: 0,
+              scrollTo: { 
+                  y: "0"
+              }
+          })
+          setTimeout(()=> {this.modal.style.opacity = 1}, 200)
+          
         } else 
         if(this.modalId == 'modal-news') {
+          console.log('open news');
+          this.modal.style.opacity = 1;
           const topScroll = document.documentElement.scrollTop;
           this.modal.style.top = topScroll + 50 +'px';
         }
@@ -1673,8 +1992,11 @@ navLinkList.forEach((link) => {
       }
     
       close() {
+        this.modal.style.display = 'none';
+        this.modal.style.opacity = 0;
         this.modal.classList.remove('opened-modal');
-        this.modal.style.top = '-1000%';
+        this.modal.style.top = '50px';
+        
         this.overlay.classList.remove('overlay--shown');
         this.isOpen = false;
         this.scrollUp.classList.remove('hidden');
@@ -1684,10 +2006,11 @@ navLinkList.forEach((link) => {
         this.mainSection.style.top = '';
 
         if(this.modalId == 'modal-prod') {
+          this.closeButton.classList.remove('close-vis');
             gsap.to(window, {
               duration: 0,
               scrollTo: {
-                  y: ".product"
+                  y: this.topScroll
               }
           })
 
@@ -1698,15 +2021,6 @@ navLinkList.forEach((link) => {
             el.classList.remove('pm-sticky');
           })
         } else if(this.modalId == 'modal-news') {
-        //   gsap.to(window, {
-        //     duration: 0,
-        //     scrollTo: {
-        //         y: ".news"
-        //     }
-        // })
-
-        // const el = document.querySelector('.news');
-        // el.scrollIntoView();
         }
           
 
@@ -1719,11 +2033,11 @@ navLinkList.forEach((link) => {
       }
     }
 
-    const modalNews = new Modal('modal-news', '.modal-trigger', '.overlay-dark');
+    const modalNews = new Modal('modal-news', '.modal-trigger', '.overlay-dark', '.modal__close');
 
     modalNews.init();
 
-    const modalProd = new Modal('modal-prod', '.modal-trigger-prod', '.overlay-dark-news');
+    const modalProd = new Modal('modal-prod', '.modal-trigger-prod', '.overlay-dark-news', '.modal-prod__close');
 
     modalProd.init();
 
@@ -1732,17 +2046,17 @@ function gsapAnimation() {
   document.addEventListener("DOMContentLoaded", function(event) {
 
         gsap.from(".header-main__title", {
-          scrollTrigger: ".header-main__title",
+          scrollTrigger: ".header-main__subtitle",
           y: '200',
           opacity: 0
       });
 
         gsap.to(".header-main__title", {
-          scrollTrigger: ".header-main__title",
+          scrollTrigger: ".header-main__subtitle",
           y: '0',
           opacity: 1,
           ease: "Expo.easeInOut",
-          delay: 1.2,
+          delay: 1.5,
       });
 
       
@@ -1796,4 +2110,128 @@ function gsapAnimation() {
 
 gsapAnimation()
 
-// })
+
+class Mobile {
+  constructor(burger, menu, close) {
+    this.menu = document.querySelector(menu);
+    this.burger = document.querySelector(burger);
+    this.closeButton = document.querySelector(close);
+    this.links = document.querySelectorAll('.mob-menu__item');
+
+    this.isOpen = false;
+    this.closeButton.addEventListener('click', () => this.close());
+    
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && this.isOpen) {
+        this.close();
+      }
+    });
+  }
+
+  open() {
+    document.body.classList.add('locked');
+
+    this.links.forEach((el) => {
+      el.addEventListener('click', () => {
+        this.close();
+      });
+    });
+
+    this.menu.classList.add('mob-menu--active');
+    this.isOpen = true;
+    
+  }
+
+  close() {
+    document.body.classList.remove('locked');
+    this.menu.classList.remove('mob-menu--active');
+    this.isOpen = false;
+
+
+  }
+
+  init() {
+    this.burger.addEventListener('click',() => {
+      
+      this.open();
+    })
+  }
+}
+
+const mobileMenu = new Mobile('.burger_menu', '.mob-menu', '.mob-menu__close');
+
+mobileMenu.init();
+
+
+let mobLinks = document.querySelectorAll('.mob-menu__item');
+
+mobLinks.forEach(element => element.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    onePunchAllow = false;
+    setTimeout(() => {
+      onePunchAllow = true;
+    }, 1100)
+
+}))
+
+
+document.getElementById("mob-menu-production").addEventListener("click", () => {
+    gsap.to(window, {
+        duration: 1,
+        scrollTo: {
+            y: ".product"
+        }
+    })
+})
+
+document.getElementById("mob-menu-about").addEventListener("click", () => {
+    gsap.to(window, {
+        duration: .5,
+        scrollTo: {
+            y: ".mission"
+        }
+    })
+})
+
+document.getElementById("mob-menu-history").addEventListener("click", () => {
+  gsap.to(window, {
+      duration: 1,
+      scrollTo: {
+          y: ".history"
+      }
+  })
+})
+
+
+document.getElementById("mob-menu-work").addEventListener("click", () => {
+    gsap.to(window, {
+        duration: 1,
+        scrollTo: {
+            y: ".work"
+        }
+    })
+})
+
+
+document.getElementById("mob-menu-news").addEventListener("click", () => {
+  gsap.to(window, {
+      duration: 1,
+      scrollTo: {
+          y: ".news"
+      }
+  })
+})
+
+document.getElementById("mob-menu-contacts").addEventListener("click", () => {
+    gsap.to(window, {
+        duration: 1,
+        scrollTo: {
+            y: ".footer"
+        }
+    })
+
+})
+
+

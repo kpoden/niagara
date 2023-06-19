@@ -5,15 +5,29 @@
     padding-top: 75px !important
     padding-left: 140px !important
 
+    +mw(500)
+        padding: 75px 20px 0 30px !important
+
 .bottom-aligned
     padding: 30% 0 80px 80px
+
+    +mw(800)
+        padding: 80% 0 20px 20px
+
+    +mw(500)
+        padding-top: 50px
 
 .dark-text
     color: #5A5A5A !important
 
+
 .bigger-text
     font-size: 32px
     line-height: 39px
+
+    +mw(600)
+        font-size: 25px
+        line-height: 30px
 
 .smaller-text
     font-size: 16px
@@ -25,6 +39,11 @@
     font-size: 64px
     line-height: 77px
     padding-bottom: 40px
+
+    +mw(600)
+        font-size: 35px
+        line-height: 37px
+
     
 .wider
     max-width: 660px !important
@@ -60,7 +79,8 @@
         padding-left: 20px
             
     
-    
+
+
     
     
     
@@ -95,6 +115,7 @@
 
     +mw(1100)
         height: 500px
+        min-width: 250px
 
     
 
@@ -122,6 +143,8 @@
         padding: 0 33px 75px
         color: #fff
 
+        +mw(450)
+            padding: 0 25px 75px
     &__title
         font-family: 'Montserrat'
         font-style: normal
@@ -130,7 +153,13 @@
         line-height: 130%
         padding-bottom: 20px
 
+        +mw(450)
+            font-size: 20px
+
     &__text
         font-weight: 400
         font-size: 16px
         line-height: 140%
+
+        +mw(450)
+            font-size: 14px

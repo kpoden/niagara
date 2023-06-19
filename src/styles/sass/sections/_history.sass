@@ -2,10 +2,11 @@
     position: relative
     background: var(--bg-grey-light)
     z-index: 102
+    padding-bottom: 30vh
     // margin-bottom: 180px
 
 
-    +mw(880)
+    +mw(490)
         display: none
 .history__wrap 
     position: relative
@@ -36,6 +37,11 @@
         margin-right: 40px
         margin-top: 15px
 
+        +mw(850)
+            margin-right: 0
+
+        
+
     &__num
         font-family: 'NeoSansW1G';
         font-weight: 400;
@@ -46,9 +52,16 @@
         white-space: nowrap;
         margin-right: 20px
 
+        +mw(850)
+            font-size: 50px
+
+        +mw(600)
+            font-size: 35px
+
 
 
 .events
+    margin-right: 10px
     
 
     &__item
@@ -59,6 +72,13 @@
         top: 0
         position: relative
         transition: .4s
+
+        +mw(850)
+            padding: 40px
+
+        +mw(770)
+            padding: 30px
+
 
         &:nth-child(2n)
             background: url(../images/footer/bg.png)
@@ -86,6 +106,12 @@
         color: var(--c-blue)
         padding-bottom: 15px
 
+        +mw(770)
+            font-size: 24px
+
+        +mw(600)
+            font-size: 18px
+
     &__text
         font-family: 'Montserrat';
         font-style: normal;
@@ -93,6 +119,12 @@
         font-size: 24px;
         line-height: 140%;
         color: #5A5A5A;
+
+        +mw(770)
+            font-size: 20px
+
+        +mw(600)
+            font-size: 16px
 
 
 .history__dec 

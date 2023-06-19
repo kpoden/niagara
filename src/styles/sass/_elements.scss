@@ -115,6 +115,12 @@
     left: calc(100% + 70vw) !important;
 }
 
+@media (max-width: 1000px) {
+    .unvisOrder {
+        left: auto !important;
+    }
+}
+
 .scroll-up {
     position: fixed;
     right: 100px;
@@ -122,6 +128,7 @@
     bottom: -100px;
     transition: .2s;
     opacity: 0;
+    z-index: 0;
 
     svg {
         width: 75px;
@@ -133,7 +140,7 @@
 .scroll-up__appear {
     opacity: 1;
     bottom: 50px;
-    z-index: 1000;
+    z-index: 9998;
 }
 
 @media (max-width: 1000px) {
@@ -173,7 +180,7 @@
     animation-name: zoomIn;
     animation-duration: 0.7s;
     animation-timing-function: ease-out;
-    animation-delay: 0.5s;
+    animation-delay: 0.3s;
     animation-direction: alternate;
     // animation-iteration-count: infinite;
     animation-fill-mode: forwards;
@@ -185,17 +192,17 @@
     0% {
         transform: scale(0.3);
     }
-    60% {
-        transform: scale(0.5);
-    }
-    94% {
-        transform: scale(0.5);
-        opacity: 1;
-    }
-    95% {
-        transform: scale(0.9);
-        opacity: 1;
-    }
+    // 60% {
+    //     transform: scale(0.5);
+    // }
+    // 94% {
+    //     transform: scale(0.5);
+    //     opacity: 1;
+    // }
+    // 95% {
+    //     transform: scale(0.9);
+    //     opacity: 1;
+    // }
     100% {
         transform: scale(1);
         opacity: 1;
@@ -206,5 +213,9 @@
 
 .inv {
     opacity: 0;
+}
+
+.locked {
+    overflow: hidden;
 }
 

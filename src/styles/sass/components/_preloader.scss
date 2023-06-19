@@ -1,0 +1,104 @@
+.preloader {
+    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 10000;
+    visibility: visible;
+    transition: .2s;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  #preloaderSvg {
+    width: 350px;
+  }
+}
+
+.preloader.done {
+  opacity: 0;
+  visibility: hidden;
+}
+    
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+    
+#svgNiagara {
+  opacity: 0.6;
+  animation: niagaraPulse 2s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes niagaraPulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+    
+@keyframes ldio-w3wevlqi52s {
+  0% {
+    top: 90px;
+    left: 90px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 15px;
+    left: 15px;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+    
+.ldio-w3wevlqi52s div {
+  position: absolute;
+  border-width: 10px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: ldio-w3wevlqi52s 1.282051282051282s cubic-bezier(0,0.2,0.8,1) infinite;
+}
+
+.ldio-w3wevlqi52s div:nth-child(1) {
+  border-color: #fd8127;
+  animation-delay: 0s;
+}
+.ldio-w3wevlqi52s div:nth-child(2) {
+  border-color: #021a42;
+  animation-delay: -0.641025641025641s;
+}
+.loadingio-spinner-ripple-3p8jz7mtlj5 {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ldio-w3wevlqi52s {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-w3wevlqi52s div { 
+    box-sizing: content-box; 
+}

@@ -23,28 +23,50 @@
     border-radius: 33px;
     -webkit-box-shadow: 2px 0px 8px 4px rgba(34, 60, 80, 0.2);
     box-shadow: 2px 0px 8px 4px rgba(34, 60, 80, 0.2);
-    z-index: 10000;
-    opacity: 0;
-    -webkit-transition: .2s;
-    transition: .2s;
+    z-index: 1000
+    opacity: 0
+    -webkit-transition: .2s
+    transition: .2s
     top: -1000%
     max-width: 1360px
+    min-width: 80%
+    // min-width: 320px
+
+    a
+        text-decoration: underline
+
 
 
     &__wrap
         padding: 60px
 
+        +mw(500)
+            padding: 60px 15px 30px
+
     &__images
         display: flex
         gap: 20px
-        padding-bottom: 60px
+        padding-bottom: 30px
+        padding-top: 60px
+        height: 400px
+        align-items: flex-start
+        justify-content: center
 
-        +mw(1400)
-            flex-direction: column
+        +mw(1000)
+            flex-wrap: wrap
+            height: auto
+
+
+        
 
     &__image
         border-radius: 10px
         overflow: hidden
+        height: 100%
+        min-width: 200px
+
+        +mw(500)
+            max-width: 90%
 
         img
             width: 100%
@@ -53,12 +75,13 @@
 
 
 
+
     &__text
         max-width: 75%
+        margin-inline: auto
 
         +mw(1400)
             max-width: 90%
-        
 
         p
             padding-bottom: 30px
@@ -69,6 +92,26 @@
             line-height: 24px
             color: var(--c-grey)
             padding-bottom: 30px
+
+            +mw(1000)
+                font-size: 16px
+
+    &__video
+        max-width: 90%
+        margin: 0 auto
+        display: block
+        margin-bottom: 50px
+
+        +mw(600)
+            max-width: 100%
+
+    &__main-image
+        max-width: 100%
+        display: block
+        margin: 0 auto
+        margin-bottom: 50px
+        max-height: 600px
+        border-radius: 10px
 
     &__close 
         position: absolute
@@ -103,7 +146,7 @@
             transform: rotate(-45deg)
 
     &.opened-modal
-        opacity: 1 !important
+        opacity: 1 
         top: 50%
 
 
